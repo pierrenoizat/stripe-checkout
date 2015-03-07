@@ -7,6 +7,16 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+
+# gem 'rqrcode' # to use pngqr
+# gem 'chunky_png' # to use pngqr
+# gem 'pngqr'
+
+gem "ffi", "~> 1.2.0"
+gem "bitcoin-addrgen",'~> 0.0.2' # this version uses the ffi gem for bindings to GMP library instead of the previous gmp gem
+
+gem 'aws-sdk', '~> 1.5.7'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'

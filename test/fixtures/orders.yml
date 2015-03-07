@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  street: MyString
+  postal_code: MyString
+  city: MyString
+  country: MyString
+  email: MyString
+  pay_type: MyString
+  total: 9.99
+  content: MyString
+  btc_address: MyString
+  rate: 9.99
+  currency: MyString
+
+two:
+  name: MyString
+  street: MyString
+  postal_code: MyString
+  city: MyString
+  country: MyString
+  email: MyString
+  pay_type: MyString
+  total: 9.99
+  content: MyString
+  btc_address: MyString
+  rate: 9.99
+  currency: MyString

@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_filter :admin_only, :except => :show
 
+
   def index
     @users = User.all
   end
@@ -39,7 +40,7 @@ class UsersController < ApplicationController
   end
 
   def secure_params
-    params.require(:user).permit(:role)
+    params.require(:user).permit(:role,:email )
   end
 
 end

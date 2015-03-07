@@ -22,5 +22,8 @@ module RailsStripeCheckout
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    
+    $MPK = 'c56b2f46fe68c07d616ab218019fb9065493590a4bb1fb030c51d532c5598b6a834e4595e4cb7f89f07d409659078b7aa5d47026cf887ee6658910eb1d38629a'
+    
   end
 end

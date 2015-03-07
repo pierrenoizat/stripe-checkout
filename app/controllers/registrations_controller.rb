@@ -1,5 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
-
+  before_filter :configure_permitted_parameters
+  
   def pay
     @user = User.new
     @user.email = params[:user][:email]
@@ -11,7 +12,13 @@ class RegistrationsController < Devise::RegistrationsController
   def create
     params[:user][:email] = params[:stripeEmail]
     params[:user][:stripeToken] = params[:stripeToken]
+    
     super
   end
-
+ 
+  protected
+  def configure_permitted_parameters
+      devise_parameter_sanitizer.for(:sign_up).push(:email, :stripeToken)
+  end
+ 
 end

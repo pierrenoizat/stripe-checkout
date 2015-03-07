@@ -40,6 +40,11 @@ GEM
     autoprefixer-rails (5.1.7)
       execjs
       json
+    aws-sdk (1.5.8)
+      httparty (~> 0.7)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
+      uuidtools (~> 2.1)
     bcrypt (3.1.10)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -47,6 +52,8 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bitcoin-addrgen (0.0.2)
+      ffi (~> 1.2.0)
     bootstrap-sass (3.3.3)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
@@ -77,6 +84,7 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.3.0)
+    ffi (1.2.1)
     gibbon (1.1.5)
       httparty
       multi_json (>= 1.9.0)
@@ -194,6 +202,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
+    uuidtools (2.1.5)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.0.0)
@@ -206,11 +215,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk (~> 1.5.7)
   better_errors
+  bitcoin-addrgen (~> 0.0.2)
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
   devise
+  ffi (~> 1.2.0)
   gibbon
   hub
   jbuilder (~> 2.0)
