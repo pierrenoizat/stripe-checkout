@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/lian/bitcoin-ruby
+  revision: a0e17fc925e7e6a08c45e319c39c50f9db666d1e
+  branch: master
+  specs:
+    bitcoin-ruby (0.0.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -85,6 +92,8 @@ GEM
     erubis (2.7.0)
     execjs (2.3.0)
     ffi (1.2.1)
+    figaro (1.1.0)
+      thor (~> 0.14)
     gibbon (1.1.5)
       httparty
       multi_json (>= 1.9.0)
@@ -218,11 +227,13 @@ DEPENDENCIES
   aws-sdk (~> 1.5.7)
   better_errors
   bitcoin-addrgen (~> 0.0.2)
+  bitcoin-ruby!
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
   devise
   ffi (~> 1.2.0)
+  figaro
   gibbon
   hub
   jbuilder (~> 2.0)

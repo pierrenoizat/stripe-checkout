@@ -63,7 +63,10 @@
         <label>Pay with Bitcoin :</label>
       </div>
 
-	<div id="qrcodeCanvas" data-qrcodestring ="1K2yLbZDHjB4m64kFfdkWKNJEsH6y6ThKe" ></div>
+	<% @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email } %>
+  	<% @order = @orders.last %>
+
+	<div id="qrcodeCanvas" data-qrcodestring = "<%= @order.qrcode_string %>"  ></div>
 	<script>
 
 	//---------------------------------------------------------------------
