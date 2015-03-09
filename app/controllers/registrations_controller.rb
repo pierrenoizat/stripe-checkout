@@ -16,12 +16,14 @@ class RegistrationsController < Devise::RegistrationsController
       :total => "#{price}",
       :content => "#{title}",
       :currency    => 'usd',
+      :status    => 'pending',
       :pay_type => 'bitcoin'
       )
       
     if @order.save
       require 'bitcoin-addrgen' # uses bitcoin-addrgen gem relying on ffi gem to call gmp C library
-      @btc_address = BitcoinAddrgen.generate_public_address($MPK, @order.id)
+      # @btc_address = BitcoinAddrgen.generate_public_address($MPK, @order.id)
+      @btc_address = '16QGg8ERSS3Je2ia4HEaLMrEN2oUxwCxYS'  # test address for bitcoinmonitor.net
       # @order.qrcode_string = "bitcoin:#{@btc_address}?amount=#{@order.total}"
       # @order.btc_address = @btc_address
       # @order.qrcode_string = "bitcoin:#{@btc_address}?amount=#{@order.total}"

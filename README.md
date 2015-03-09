@@ -10,7 +10,7 @@ Problems? Issues?
 Need help? Contact me: boussac.75011@gmail.com
 
 
-If the application doesn't work as expected, please [report an issue](https://github.com/RailsApps/rails_apps_composer/issues).
+If the application doesn't work as expected, please [report an issue](https://github.com/pierrenoizat/stripe-checkout/issues).
 
 Ruby on Rails
 -------------
@@ -25,18 +25,12 @@ Learn more about [Installing Rails](http://railsapps.github.io/installing-rails.
 Getting Started
 ---------------
 
-Documentation and Support
--------------------------
 
-Issues
--------------
-
-
-Contributing
-------------
 
 Credits
 -------
+Thanks to Daniel Kehoe for his awesome RailsApps Project.
 
 License
 -------
+AGPL License. Copyright 2015 Pierre NOIZAT

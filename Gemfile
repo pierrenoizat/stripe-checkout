@@ -17,6 +17,7 @@ gem "bitcoin-addrgen",'~> 0.0.2' # this version uses the ffi gem for bindings to
 gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master', require: 'bitcoin'
 
 gem 'figaro'
+gem 'mechanize'
 
 gem 'aws-sdk', '~> 1.5.7'
 

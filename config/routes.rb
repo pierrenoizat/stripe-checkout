@@ -4,6 +4,14 @@ Rails.application.routes.draw do
   devise_scope :user do
     post 'pay', to: 'registrations#pay'
   end
+  
+  resources :orders do
+	collection do
+		post :payment_notification
+		get :payment_notification
+	end
+	end
+  
   resources :users
   root :to => 'visitors#index'
 end
