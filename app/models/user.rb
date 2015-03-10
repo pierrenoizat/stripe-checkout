@@ -74,6 +74,7 @@ class User < ActiveRecord::Base
       :currency    => 'usd',
       :pay_type => 'card'
       )
+      @order.save
 
     end
     

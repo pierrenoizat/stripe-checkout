@@ -18,6 +18,8 @@ gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master
 
 gem 'figaro'
 gem 'mechanize'
+gem 'paymium_api'
+gem 'oauth2', '~> 1.0.0'
 
 gem 'aws-sdk', '~> 1.5.7'
 

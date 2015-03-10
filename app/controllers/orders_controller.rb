@@ -1,14 +1,26 @@
 class OrdersController < ApplicationController
-  protect_from_forgery :except => :payment_notification
+  # protect_from_forgery :except => :payment_notification
   def create
       @order = Order.create(order_params)
       
       if @order.save
-        require 'bitcoin-addrgen' # uses bitcoin-addrgen gem relying on ffi gem to call gmp C library
-        @btc_address = BitcoinAddrgen.generate_public_address($MPK, @order.id)
+        # require 'bitcoin-addrgen' # uses bitcoin-addrgen gem relying on ffi gem to call gmp C library
+        # @btc_address = BitcoinAddrgen.generate_public_address($MPK, @order.id)
+        
+        @client = Paymium::Api::Client.new  host: 'https://paymium.com/api/v1',
+                                            key: Rails.application.secrets.paymium_api_key,
+                                            secret: Rails.application.secrets.paymium_secret_key
+        
+        @amnt = 200                                   
+        payment_request = @client.post('/merchant/create_payment')  amount:"#{@amnt}" , 
+                                                                    payment_split:"0", 
+                                                                    currency:"EUR"
+            
+        # locked_euro = @client.get('/user')["locked_eur"]
+        @btc_address = @client.get('/merchant/create_payment')["payment_address"]
   		  @order.qrcode_string = "bitcoin:#{@btc_address}?amount=#{@amnt}"
   		  @order.btc_address = @btc_address
-  		  @order.update_attributes(:btc_address => @btc_address)
+  		  @order.update_attributes(:btc_address => @btc_address, :qrcode_string => @qrcode_string)
       end
       
     end
