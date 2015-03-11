@@ -35,6 +35,7 @@
       <div class="form-group">
         <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => "Password confirmation" %>
       </div>
+	  <%= recaptcha_tags :public_key => Figaro.env.recaptcha_public_key %>
       <%= f.submit '1. Sign up', :class => 'button left' %>
       <%= f.submit '2. Pay', :class => 'button' , :disabled => 'disabled' %>
     <% end %>
@@ -1362,7 +1363,7 @@
         data-email="<%= @user.email %>"
         data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
         data-description="<%= Rails.application.secrets.product_title %>"
-        data-amount="<%= Rails.application.secrets.product_price %>"
+        data-amount="<%= @order.total %>"
 		>
        </script>
     <% end %>

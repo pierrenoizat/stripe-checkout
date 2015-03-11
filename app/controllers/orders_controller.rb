@@ -1,56 +1,34 @@
 class OrdersController < ApplicationController
-  # protect_from_forgery :except => :payment_notification
-  def create
-      @order = Order.create(order_params)
-      
-      if @order.save
-        # require 'bitcoin-addrgen' # uses bitcoin-addrgen gem relying on ffi gem to call gmp C library
-        # @btc_address = BitcoinAddrgen.generate_public_address($MPK, @order.id)
-        
-        @client = Paymium::Api::Client.new  host: 'https://paymium.com/api/v1',
-                                            key: Rails.application.secrets.paymium_api_key,
-                                            secret: Rails.application.secrets.paymium_secret_key
-        
-        @amnt = 200                                   
-        payment_request = @client.post('/merchant/create_payment')  amount:"#{@amnt}" , 
-                                                                    payment_split:"0", 
-                                                                    currency:"EUR"
-            
-        # locked_euro = @client.get('/user')["locked_eur"]
-        @btc_address = @client.get('/merchant/create_payment')["payment_address"]
-  		  @order.qrcode_string = "bitcoin:#{@btc_address}?amount=#{@amnt}"
-  		  @order.btc_address = @btc_address
-  		  @order.update_attributes(:btc_address => @btc_address, :qrcode_string => @qrcode_string)
-      end
-      
-    end
+  # protect_from_forgery :except => :callback
     
-    def payment_notification
+    def callback
       
-      # string = "http://www.bitcoinmonitor.net/api/v1/microbitcoin/863/notification/url/"
-      # @agent = Mechanize.new
-      # page = @agent.get string
+      # @client = Paymium::Api::Client.new  host: 'https://paymium.com/api/v1',
+      #                                    key: Rails.application.secrets.paymium_api_key,
+      #                                    secret: Rails.application.secrets.paymium_secret_key
 
-      # data = page.body
-      string = 'http://requestb.in/1b2c5wr1'
-      require 'open-uri'
-      result = open(string)
-
-       # we convert the returned JSON data to native Ruby
-       # data structure - a hash
-       # result = JSON.parse(data)
-
-    	amount = params['signed_data']['amount']  # amount is in satoshis
-    	address = params['signed_data']['address'] 
-    	# @order = Order.find_by_btc_address(address)
-    	@order = Order.find_by_id(11) # test order
-    	@order.update_attributes(:status => 'paid')
+      # payment = @client.get('/user')
+      # locked_euro = payment["locked_eur"]
+      
+      # Paymium API Account operation properties:
+      # currency	currency	"BTC"
+      # name	name of operation	"account_operation"
+      # created_at	date created	"2013-10-22T14:30:06.000Z"
+      # created_at_int	timestamp	1382452206
+      # amount	currency amount	49.38727114
+      # address	bitcoin address if any	"1FPDBXNqSkZMsw1kSkkajcj8berxDQkUoc"
+      # tx_hash	bitcoin transaction hash if any	"86e6e72aa559428524e035cd6b2997004..."
+      @btc_address = params["address"]
+      @order = Order.find_by_btc_address(@btc_address)
+      @order.status = 'paid'
+      @order.balance = params["amount"] 
+      @order.save
       
     end
 
   private
     def order_params
-      params.require(:order).permit(:name, :btc_address, :email)
+      params.require(:order).permit(:name, :btc_address, :email, :amount, :status)
     end
   
   

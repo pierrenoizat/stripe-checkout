@@ -5,10 +5,12 @@ class ApplicationController < ActionController::Base
   helper_method :create_order
   
   def create_order(email)
+    
+    @total = Rails.application.secrets.product_price/100.0 # price in EUR
+    
     @order = Order.create(
       :email => email,
-      :balance      => "#{Rails.application.secrets.product_price}",
-      :total => "#{Rails.application.secrets.product_price}",
+      :total => "#{@total}",
       :content => "#{Rails.application.secrets.product_title}",
       :currency    => 'eur',
       :status    => 'pending',
@@ -18,27 +20,23 @@ class ApplicationController < ActionController::Base
     if @order.save
       # require 'bitcoin-addrgen' # uses bitcoin-addrgen gem relying on ffi gem to call gmp C library
       # @btc_address = BitcoinAddrgen.generate_public_address($MPK, @order.id)
-      # @btc_address = '16QGg8ERSS3Je2ia4HEaLMrEN2oUxwCxYS'  # test address for bitcoinmonitor.net
-      # @order.qrcode_string = "bitcoin:#{@btc_address}?amount=#{@order.total}"
-      # @order.btc_address = @btc_address
-      # @order.qrcode_string = "bitcoin:#{@btc_address}?amount=#{@order.total}"
-      
+
+      # using paymium_api gem:
       @client = Paymium::Api::Client.new  host: 'https://paymium.com/api/v1',
                                           key: Rails.application.secrets.paymium_api_key,
                                           secret: Rails.application.secrets.paymium_secret_key
-      
-      @amnt = 200                                   
-      payment_request = @client.post '/merchant/create_payment',  amount:"#{@amnt}" , 
+                                       
+      payment_request = @client.post '/merchant/create_payment',  amount:"#{@order.total}" , 
                                                                   payment_split:"0", 
-                                                                  currency:"EUR"
+                                                                  currency:"EUR",
+                                                                  callback_url: "#{$MAIN_URL}/orders/callback"
           
-      # locked_euro = @client.get('/user')["locked_eur"]
-      @btc_address = payment_request["payment_address"]
-		  @order.qrcode_string = "bitcoin:#{@btc_address}?amount=#{@amnt}"
-		  @order.btc_address = @btc_address
-		  # @order.update_attributes(params[:order])
+      @order.btc_address = payment_request["payment_address"]
+      @btc_amount = payment_request["btc_amount"]
+      @order.balance = @btc_amount
+		  @order.qrcode_string = "bitcoin:#{@order.btc_address}?amount=#{@btc_amount.round(6)}" # warning: make sure the number of decimals here matches that of the Paymium API
       @order.save
-      # @order.update_attributes(:btc_address => @btc_address, :qrcode_string => "bitcoin:#{@btc_address}?amount=#{@order.total}")
+
       end
     
   end

@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   
   resources :orders do
 	collection do
-		post :payment_notification
-		get :payment_notification
+		post :callback
+		get :callback
+		put :callback
 	end
 	end
   

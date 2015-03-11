@@ -18,8 +18,10 @@ gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master
 
 gem 'figaro'
 gem 'mechanize'
-gem 'paymium_api'
+gem 'paymium_api' #, git: 'https://github.com/Paymium/paymium_api' # 0.0.6
 gem 'oauth2', '~> 1.0.0'
+
+gem 'recaptcha', require: 'recaptcha/rails'
 
 gem 'aws-sdk', '~> 1.5.7'
 

@@ -7,12 +7,12 @@ class RegistrationsController < Devise::RegistrationsController
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     
-    price = Rails.application.secrets.product_price
-    title = Rails.application.secrets.product_title
-    
-    create_order(@user.email)
-    
-    render :new
+    if verify_recaptcha :private_key => Figaro.env.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
+      create_order(@user.email)
+      render :new
+    else
+      render "visitors/index" 
+    end
   end
 
   def create
