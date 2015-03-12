@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
       @order.status = 'paid'
       # @order.balance = params["amount"] 
       @order.save
-      
+      render :nothing => true, :status => 200, :content_type => 'text/html'
     end
 
   private

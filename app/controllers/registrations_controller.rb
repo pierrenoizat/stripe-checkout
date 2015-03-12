@@ -9,7 +9,7 @@ class RegistrationsController < Devise::RegistrationsController
     
     if verify_recaptcha :private_key => Rails.application.secrets.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
       create_order(@user.email)
-      render :new
+
     else
       render "visitors/index" 
     end
