@@ -7,12 +7,12 @@ class RegistrationsController < Devise::RegistrationsController
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
     
-    if verify_recaptcha :private_key => Rails.application.secrets.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
+    #if verify_recaptcha :private_key => Rails.application.secrets.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
       create_order(@user.email)
-
-    else
-      render "visitors/index" 
-    end
+      render :new
+    #else
+    #  render "visitors/index" 
+    #end
   end
 
   def create
