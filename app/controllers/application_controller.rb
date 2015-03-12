@@ -14,7 +14,6 @@ class ApplicationController < ActionController::Base
       :content => "#{Rails.application.secrets.product_title}",
       :currency    => 'eur',
       :status    => 'pending',
-      :ba
       :pay_type => 'bitcoin'
       )
       
