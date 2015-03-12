@@ -14,6 +14,7 @@ class ApplicationController < ActionController::Base
       :content => "#{Rails.application.secrets.product_title}",
       :currency    => 'eur',
       :status    => 'pending',
+      :ba
       :pay_type => 'bitcoin'
       )
       
@@ -33,7 +34,7 @@ class ApplicationController < ActionController::Base
           
       @order.address = payment_request["payment_address"]
       @btc_amount = payment_request["btc_amount"]
-      @order.balance = @btc_amount
+      @order.balance = @btc_amount.to_f
 		  @order.qrcode_string = "bitcoin:#{@order.address}?amount=#{@btc_amount}" # warning: make sure the number of decimals here matches that of the Paymium API
       @order.save
 
