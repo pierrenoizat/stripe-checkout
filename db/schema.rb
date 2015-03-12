@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308133229) do
+ActiveRecord::Schema.define(version: 20150312164321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 20150308133229) do
     t.string   "country"
     t.string   "email"
     t.string   "pay_type"
-    t.decimal  "total"
+    t.decimal  "amount"
     t.string   "content"
-    t.string   "btc_address"
+    t.string   "address"
     t.decimal  "rate"
     t.string   "currency"
     t.datetime "created_at",    null: false
