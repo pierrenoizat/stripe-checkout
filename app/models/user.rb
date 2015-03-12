@@ -63,16 +63,16 @@ class User < ActiveRecord::Base
       :customer    => customer.id,
       :amount      => "#{price}",
       :description => "#{title}",
-      :currency    => 'usd'
+      :currency    => 'eur'
     )
      
     if charge[:paid] == true
       @order.update_attributes(
       :user_id => charge[:customer],
-      :balance      => 0,
       :content => "#{title}",
       :currency    => 'usd',
-      :pay_type => 'card'
+      :pay_type => 'card',
+      :status => 'paid'
       )
       @order.save
 
