@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/alexpeattie/heroku_secrets.git
+  revision: 717af8e0acf399bc88d2c8c1a7e230023942af0f
+  specs:
+    heroku_secrets (0.0.2)
+
+GIT
   remote: https://github.com/Paymium/paymium_api
   revision: 540f0440262c86113b59a255f0698cdbaf7f1b3e
   specs:
@@ -275,6 +281,7 @@ DEPENDENCIES
   ffi (~> 1.2.0)
   figaro
   gibbon
+  heroku_secrets!
   hub
   jbuilder (~> 2.0)
   jquery-rails
