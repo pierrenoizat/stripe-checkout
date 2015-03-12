@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   
   def create_order(email)
     
-    @total = Rails.application.secrets.product_price/100.0 # price in EUR
+    @total = Rails.application.secrets.product_price.to_i/100.0 # price in EUR
     
     @order = Order.create(
       :email => email,
