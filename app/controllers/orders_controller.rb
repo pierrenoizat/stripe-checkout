@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
       # tx_hash	bitcoin transaction hash if any	"86e6e72aa559428524e035cd6b2997004..."
       
       
-      @btc_address = params[:address]
+      @btc_address = params[:payment_address]
       @order = Order.find_by_address(@btc_address)
       # @order = Order.find_by_id(1) for test purposes
       
