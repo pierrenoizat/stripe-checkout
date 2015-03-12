@@ -17,6 +17,7 @@ gem "bitcoin-addrgen",'~> 0.0.2' # this version uses the ffi gem for bindings to
 gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master', require: 'bitcoin'
 
 gem 'figaro'
+gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
 gem 'mechanize'
 gem 'paymium_api', git: 'https://github.com/Paymium/paymium_api' # 0.0.7
 gem 'oauth2', '~> 1.0.0'

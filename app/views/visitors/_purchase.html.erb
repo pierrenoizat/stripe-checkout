@@ -37,7 +37,7 @@
 	      <div class="form-group">
 	        <%= f.password_field :password_confirmation, class: 'form-control', :placeholder => "Password confirmation" %>
 	      </div>
-		  <%= recaptcha_tags :public_key => Figaro.env.recaptcha_public_key %>
+		  <%= recaptcha_tags :public_key => Rails.application.secrets.recaptcha_public_key %>
 	      <%= f.submit '1. Sign up', :class => 'button left' %>
 	      <%= f.submit '2. Pay', :class => 'button' , :disabled => 'disabled' %>
 	    <% end %>
