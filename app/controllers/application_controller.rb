@@ -6,11 +6,11 @@ class ApplicationController < ActionController::Base
   
   def create_order(email)
     
-    @total = Rails.application.secrets.product_price.to_i/100.0 # price in EUR
+    @amount = Rails.application.secrets.product_price.to_i/100.0 # price in EUR
     
     @order = Order.create(
       :email => email,
-      :total => "#{@total}",
+      :amount => "#{@amount}",
       :content => "#{Rails.application.secrets.product_title}",
       :currency    => 'eur',
       :status    => 'pending',
