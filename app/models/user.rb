@@ -1,8 +1,12 @@
 class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
+  
+  before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
+  
   before_create :pay_with_card, unless: Proc.new { |user| user.admin? }
-  after_create :sign_up_for_mailing_list
+  
+  # after_create :sign_up_for_mailing_list
 
   has_many :orders
   attr_accessor :stripeToken
@@ -43,11 +47,22 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  def pay_with_bitcoin
+    
+    @orders = Order.order("created_at ASC").all.select { |m| m.email == self.email }
+    @order = @orders.last
+    
+  end
+
+
 
   def pay_with_card
     
     @orders = Order.order("created_at ASC").all.select { |m| m.email == self.email }
     @order = @orders.last
+
+    if @order.pay_type == "card"
     
     if self.stripeToken.nil?
       self.errors[:base] << 'Could not verify card.'
@@ -74,17 +89,21 @@ class User < ActiveRecord::Base
       :status => 'paid'
       )
       @order.save
-
     end
     
-    Rails.logger.info("Stripe transaction for #{self.email}") if charge[:paid] == true
-  rescue Stripe::InvalidRequestError => e
-    self.errors[:base] << e.message
-    raise ActiveRecord::RecordInvalid.new(self)
-  rescue Stripe::CardError => e
-    self.errors[:base] << e.message
-    raise ActiveRecord::RecordInvalid.new(self)
+    # Rails.logger.info("Stripe transaction for #{self.email}") if charge[:paid] == true
+  # rescue Stripe::InvalidRequestError => e
+    # self.errors[:base] << e.message
+    # raise ActiveRecord::RecordInvalid.new(self)
+  # rescue Stripe::CardError => e
+    # self.errors[:base] << e.message
+    # raise ActiveRecord::RecordInvalid.new(self)
+    
+  end # if
+    
   end
+  
+  
 
   def sign_up_for_mailing_list
     MailingListSignupJob.perform_later(self)

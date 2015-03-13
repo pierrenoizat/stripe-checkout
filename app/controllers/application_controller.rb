@@ -16,8 +16,7 @@ class ApplicationController < ActionController::Base
       :amount => "#{@amount}",
       :content => "#{Rails.application.secrets.product_title}",
       :currency    => 'eur',
-      :status    => 'pending',
-      :pay_type => 'bitcoin'
+      :status    => 'pending'
       )
       
     if @order.save
