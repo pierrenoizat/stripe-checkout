@@ -12,6 +12,8 @@ Rails.application.routes.draw do
 		put :callback
 	end
 	end
+	
+	resources :charges
   
   resources :users
   root :to => 'visitors#index'
