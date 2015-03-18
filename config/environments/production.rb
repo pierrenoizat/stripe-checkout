@@ -94,5 +94,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   
   $MAIN_URL = "https://serene-waters-8217.herokuapp.com/"
+  $ORDERS_URL = "https://serene-waters-8217.herokuapp.com/orders/"
   
 end

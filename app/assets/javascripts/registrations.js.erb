@@ -41,7 +41,7 @@ ready = function() {
 			
 			var xmlhttp = new XMLHttpRequest();
 			
-			var url = "<%= $MAIN_URL %>" + "orders/" orderId;
+			var url = "<%= $ORDERS_URL %>" + orderId;
 
 			xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
