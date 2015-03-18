@@ -93,6 +93,6 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  $MAIN_URL = "https://serene-waters-8217.herokuapp.com"
+  $MAIN_URL = "https://serene-waters-8217.herokuapp.com/"
   
 end
