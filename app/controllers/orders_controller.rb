@@ -1,6 +1,15 @@
 class OrdersController < ApplicationController
   # protect_from_forgery :except => :callback
   skip_before_filter :verify_authenticity_token, :except => [:update, :create]
+  
+    def show
+      @order = Order.find(params[:id])
+      
+      respond_to do |format|
+              format.json
+            end
+
+    end
     
     def callback
       

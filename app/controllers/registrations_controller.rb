@@ -9,11 +9,28 @@ class RegistrationsController < Devise::RegistrationsController
     
     #if verify_recaptcha :private_key => Rails.application.secrets.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
       create_order(@user.email)
-      render :new  # form with payment options
+      # render :new  # form with payment options
+      
+      respond_to do |format|
+          # that will mean to send a javascript code to client-side;
+          format.js { render :action => "new" }
+          format.html { render :action => "new" }
+        end
+      
     #else
     #  render "visitors/index" 
     #end
   end
+  
+  
+  def new
+    
+    respond_to do |format|
+        format .js  { @user = current_user }
+    end
+    
+  end 
+
 
   def create
     params[:user][:email] = params[:stripeEmail]

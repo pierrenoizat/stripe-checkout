@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_scope :user do
     post 'pay', to: 'registrations#pay'
+    get 'pay', to: 'registrations#pay'
   end
   
   resources :orders do
@@ -14,7 +15,7 @@ Rails.application.routes.draw do
 	end
 	
 	resources :charges
-  
+  resources :orders
   resources :users
   root :to => 'visitors#index'
 end

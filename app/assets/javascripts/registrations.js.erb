@@ -1,0 +1,86 @@
+var ready;
+ready = function() {
+
+
+	var opts = {
+	  lines: 8, // The number of lines to draw
+	  length: 7, // The length of each line
+	  width: 3, // The line thickness
+	  radius: 5, // The radius of the inner circle
+	  corners: 1, // Corner roundness (0..1)
+	  rotate: 0, // The rotation offset
+	  direction: 1, // 1: clockwise, -1: counterclockwise
+	  color: '#000', // #rgb or #rrggbb or array of colors
+	  speed: 1, // Rounds per second
+	  trail: 50, // Afterglow percentage
+	  shadow: false, // Whether to render a shadow
+	  hwaccel: false, // Whether to use hardware acceleration
+	  className: 'spinner', // The CSS class to assign to the spinner
+	  zIndex: 2e9, // The z-index (defaults to 2000000000)
+	  top: '50%', // Top position relative to parent
+	  left: '50%' // Left position relative to parent
+	};
+	var target = document.getElementById('spinner');
+	var spinner = new Spinner(opts).spin(target);
+	
+	var myVar = setInterval(function(){ myTimer() }, 5000); // check database value every 5 seconds
+	var duration = 0;
+	var durationLimit = 12; // up to 60 seconds to pay
+	var orderId = "<%= Order.last.id %>"
+	var paid = false;
+	
+	function myTimer() {
+
+		if ((duration < durationLimit) && (paid == false)) {
+		    var d = new Date();
+		    var t = d.toLocaleTimeString();
+		    document.getElementById("timer").innerHTML = t;
+		
+			var response = "non"
+			var jsonResponse;
+			
+			var xmlhttp = new XMLHttpRequest();
+			
+			var url = "http://localhost:3000/orders/" + orderId;
+
+			xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+			    response = JSON.parse(xmlhttp.responseText);
+			    }
+
+			}
+
+			xmlhttp.open("GET", url, false);  // false means synchronous, wait for the response
+			xmlhttp.send();
+			if (response.status == "&quot;paid&quot;") {
+				paid = true;
+			}
+			console.log(response);
+		
+		    duration++;
+		}
+		else {
+			myStopFunction();
+			
+			
+		}
+
+	}
+
+	function myStopFunction() {
+	    clearInterval(myVar);
+		spinner.stop(target);
+	}
+
+};
+
+	$(document).ready(ready);
+	
+
+
+	
+
+	
+
+
+	

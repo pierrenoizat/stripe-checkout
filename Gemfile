@@ -23,6 +23,7 @@ gem 'paymium_api', git: 'https://github.com/Paymium/paymium_api' # 0.0.7
 gem 'oauth2', '~> 1.0.0'
 
 gem 'recaptcha', require: 'recaptcha/rails'
+gem 'spinjs-rails' # rails 3.1 only ?
 
 gem 'aws-sdk', '~> 1.5.7'
 
