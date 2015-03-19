@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
       payment_request = @client.post '/merchant/create_payment',  amount:"#{@order.amount}" , 
                                                                   payment_split:"0", 
                                                                   currency:"EUR",
-                                                                  callback_url: "#{$MAIN_URL}orders/callback"
+                                                                  callback_url: "#{$ORDERS_URL}callback"
           
       @order.address = payment_request["payment_address"]
       @btc_amount = payment_request["btc_amount"]

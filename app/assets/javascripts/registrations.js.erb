@@ -26,7 +26,9 @@ ready = function() {
 	var myVar = setInterval(function(){ myTimer() }, 5000); // check database value every 5 seconds
 	var duration = 0;
 	var durationLimit = 12; // up to 60 seconds to pay
-	var orderId = "<%= Order.last.id %>"
+	var email = $('#timer').data('email')
+	var orderId = $('#timer').data('orderid')
+	// var orderId = "<%= Order.last.id %>"
 	var paid = false;
 	
 	function myTimer() {
@@ -56,6 +58,7 @@ ready = function() {
 				paid = true;
 			}
 			console.log(response);
+			console.log(email);
 		
 		    duration++;
 		}

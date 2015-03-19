@@ -64,12 +64,12 @@
         <label>Pay with Bitcoin :</label>
       </div>
 
-	<!--<% @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email } %>-->
-  	<% @order = Order.last %>
+	<% @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email } %>
+  	<% @order = @orders.last %>
 	<div id="spinner" ></div>
-	<span>Dear <%= @order.email %>, please pay the following address within 10 seconds:</span>
+	<span>Dear <%= @user.email %>, please pay the following address within one minute:</span>
 	<%= @order.address %></br>
-	<span id="timer"></span></br>
+	<span id="timer" data-email ="<%= @user.email %>" data-orderid ="<%= @order.id %>"></span></br>
 	<ul></ul>
 	<span style="align:center;"><div id="qrcodeCanvas" data-qrcodestring = "<%= @order.qrcode_string %>" style="align:center;" ></div></span>
 <script>
