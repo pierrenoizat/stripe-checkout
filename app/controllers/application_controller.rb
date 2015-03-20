@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
     require 'bigdecimal'
     require 'bigdecimal/util'
     
-    @amount = Rails.application.secrets.product_price.to_i/100.0 # price in EUR
+    @amount = $PRODUCT_PRICE.to_i/100.0 # price in EUR
     
     @order = Order.create(
       :email => email,

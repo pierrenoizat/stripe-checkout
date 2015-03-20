@@ -23,9 +23,9 @@ ready = function() {
 	var target = document.getElementById('spinner');
 	var spinner = new Spinner(opts).spin(target);
 	
-	var myVar = setInterval(function(){ myTimer() }, 5000); // check database value every 5 seconds
+	var myVar = setInterval(function(){ myTimer() }, 4000); // check database value every 4 seconds
 	var duration = 0;
-	var durationLimit = 12; // up to 60 seconds to pay
+	var durationLimit = 15; // up to 60 seconds to pay
 	var email = $('#timer').data('email')
 	var orderId = $('#timer').data('orderid')
 	// var orderId = "<%= Order.last.id %>"
@@ -84,6 +84,7 @@ ready = function() {
 			    link.setAttribute('href', '<%= Rails.root %>'); // set link path
 
 			img.onload = function() {
+				div.appendChild(link);
 		  		link.appendChild(img);
 				};
 

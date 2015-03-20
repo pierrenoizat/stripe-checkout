@@ -72,7 +72,7 @@ class User < ActiveRecord::Base
       :email => self.email,
       :card  => self.stripeToken
     )
-    price = Rails.application.secrets.product_price
+    price = $PRODUCT_PRICE
     title = Rails.application.secrets.product_title
     charge = Stripe::Charge.create(
       :customer    => customer.id,
