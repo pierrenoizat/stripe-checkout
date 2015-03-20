@@ -1360,7 +1360,7 @@ QRBitBuffer.prototype = {
 
 </script>
 <br/>
-	<span>If you do not have bitcoins, please pay by card:</span>
+	<span id="paybycard">If you do not have bitcoins, please pay by card:</span>
 <br/><br/>
 <div id="my-buttons">
       <%= f.submit '1. Sign up', :class => 'button left', :disabled => 'disabled' %>
@@ -1374,6 +1374,7 @@ QRBitBuffer.prototype = {
 		>
        </script>
 </div>
+<div id="checkmark"></div>
     <% end %>
   </div>
 <% end %>

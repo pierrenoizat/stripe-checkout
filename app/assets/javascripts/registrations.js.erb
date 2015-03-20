@@ -74,6 +74,9 @@ ready = function() {
 		document.getElementById('timer').innerHTML += '<br>Bitcoin payment received: thank you!';
 		var element = document.getElementById("my-buttons");
 		element.parentNode.removeChild(element);
+		var element = document.getElementById("paybycard");
+		element.parentNode.removeChild(element);
+		document.getElementById('checkmark').innerHTML += "<%= image_tag("tick.png") %>";
 	    clearInterval(myVar);
 		spinner.stop(target);
 	}
