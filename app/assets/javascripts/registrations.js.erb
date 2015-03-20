@@ -53,7 +53,6 @@ ready = function() {
 			}
 
 			xmlhttp.open("GET", url, false);  // false means synchronous, wait for the response
-			xmlhttp.responseType = 'json';
 			xmlhttp.send();
 			if (response.status == "&quot;paid&quot;") {
 				paid = true;
