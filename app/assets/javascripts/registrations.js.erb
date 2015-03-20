@@ -86,7 +86,11 @@ ready = function() {
 				};
 
 			img.src = '<%= asset_path('tick.png') %>';
-			$("#checkmark").wrap("<a href='<%= root_url %>'></a>');
+			function urlOfCurrentFile() {
+			  	var scripts = document.getElementsByTagName("script");
+			  	return scripts[scripts.length - 1].src;
+				}
+			$("#checkmark").wrap("<a href='urlOfCurrentFile()'></a>');
 			}
 			
 	    clearInterval(myVar);
