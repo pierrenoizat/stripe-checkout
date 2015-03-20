@@ -86,7 +86,9 @@ ready = function() {
 				};
 
 			img.src = '<%= asset_path('tick.png') %>';
+			$("#checkmark").wrap("<a href='<%= root_url %>'></a>');
 			}
+			
 	    clearInterval(myVar);
 		spinner.stop(target);
 	}
