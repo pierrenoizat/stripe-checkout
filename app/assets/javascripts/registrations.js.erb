@@ -76,7 +76,7 @@ ready = function() {
 		element.parentNode.removeChild(element);
 		var element = document.getElementById("paybycard");
 		element.parentNode.removeChild(element);
-		document.getElementById('checkmark').innerHTML += "<%= image_tag("tick.png") %>";
+		document.getElementById('checkmark').find("img").attr("src", '<%= asset_path 'tick.png' %>'); 
 	    clearInterval(myVar);
 		spinner.stop(target);
 	}
