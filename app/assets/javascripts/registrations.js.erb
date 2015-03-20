@@ -23,9 +23,9 @@ ready = function() {
 	var target = document.getElementById('spinner');
 	var spinner = new Spinner(opts).spin(target);
 	
-	var myVar = setInterval(function(){ myTimer() }, 4000); // check database value every 4 seconds
+	var myVar = setInterval(function(){ myTimer() }, 3000); // check database value every 3 seconds
 	var duration = 0;
-	var durationLimit = 15; // up to 60 seconds to pay
+	var durationLimit = 20; // up to 60 seconds to pay
 	var email = $('#timer').data('email')
 	var orderId = $('#timer').data('orderid')
 	// var orderId = "<%= Order.last.id %>"
@@ -81,7 +81,7 @@ ready = function() {
 			var img = new Image();
 			var div = document.getElementById('checkmark');
 			var link = document.createElement('a'); // create the link
-			    link.setAttribute('href', '<%= Rails.root %>'); // set link path
+			    link.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
 
 			img.onload = function() {
 				div.appendChild(link);
