@@ -1362,6 +1362,7 @@ QRBitBuffer.prototype = {
 <br/>
 	<span>If you do not have bitcoins, please pay by card:</span>
 <br/><br/>
+<div id="my-buttons">
       <%= f.submit '1. Sign up', :class => 'button left', :disabled => 'disabled' %>
        <script src="https://checkout.stripe.com/v2/checkout.js"
         class="stripe-button"
@@ -1372,6 +1373,7 @@ QRBitBuffer.prototype = {
         data-amount="<%= @order.amount %>"
 		>
        </script>
+</div>
     <% end %>
   </div>
 <% end %>

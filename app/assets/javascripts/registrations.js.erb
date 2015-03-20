@@ -72,10 +72,8 @@ ready = function() {
 
 	function myStopFunction() {
 		document.getElementById('timer').innerHTML += '<br>Bitcoin payment received: thank you!';
-		var paras = document.getElementsByClassName('stripe-button');
-
-		while(paras[0]) {
-		    paras[0].parentNode.removeChild(paras[0]);
+		var element = document.getElementById("my-buttons");
+		element.parentNode.removeChild(element);
 		}​
 	    clearInterval(myVar);
 		spinner.stop(target);
