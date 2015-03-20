@@ -71,21 +71,22 @@ ready = function() {
 	}
 
 	function myStopFunction() {
-		document.getElementById('timer').innerHTML += '<br>Bitcoin payment received: thank you!';
-		var element = document.getElementById("my-buttons");
-		element.parentNode.removeChild(element);
-		var element = document.getElementById("paybycard");
-		element.parentNode.removeChild(element);
+		if (paid == true) {
+			document.getElementById('timer').innerHTML += '<br>Bitcoin payment received: thank you!';
+			var element = document.getElementById("my-buttons");
+			element.parentNode.removeChild(element);
+			var element = document.getElementById("paybycard");
+			element.parentNode.removeChild(element);
 		
-		var img = new Image();
-		var div = document.getElementById('checkmark');
+			var img = new Image();
+			var div = document.getElementById('checkmark');
 
-		img.onload = function() {
-		  div.appendChild(img);
-		};
+			img.onload = function() {
+		  		div.appendChild(img);
+				};
 
-		img.src = '<%= asset_path('tick.png') %>';
-		
+			img.src = '<%= asset_path('tick.png') %>';
+			}
 	    clearInterval(myVar);
 		spinner.stop(target);
 	}
