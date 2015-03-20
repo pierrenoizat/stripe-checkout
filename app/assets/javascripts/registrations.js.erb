@@ -72,7 +72,11 @@ ready = function() {
 
 	function myStopFunction() {
 		document.getElementById('timer').innerHTML += '<br>Bitcoin payment received: thank you!';
-		$('.stripe-button').remove();
+		var paras = document.getElementsByClassName('stripe-button');
+
+		while(paras[0]) {
+		    paras[0].parentNode.removeChild(paras[0]);
+		}​
 	    clearInterval(myVar);
 		spinner.stop(target);
 	}
