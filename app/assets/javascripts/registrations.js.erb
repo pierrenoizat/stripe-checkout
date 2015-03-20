@@ -80,10 +80,11 @@ ready = function() {
 		
 			var img = new Image();
 			var div = document.getElementById('checkmark');
+			var link = document.createElement('a'); // create the link
+			    link.setAttribute('href', '<%= Rails.root %>'); // set link path
 
 			img.onload = function() {
-		  		div.appendChild(img);
-				div.wrap("<a href='<%= Rails.root %>'></a>");
+		  		link.appendChild(img);
 				};
 
 			img.src = '<%= asset_path('tick.png') %>';
