@@ -83,11 +83,10 @@ ready = function() {
 
 			img.onload = function() {
 		  		div.appendChild(img);
+				div.wrap("<a href='<%= Rails.root %>'></a>");
 				};
 
 			img.src = '<%= asset_path('tick.png') %>';
-		
-			$("#checkmark").wrap("<a href='<%= Rails.root %>'></a>");
 			}
 			
 	    clearInterval(myVar);
