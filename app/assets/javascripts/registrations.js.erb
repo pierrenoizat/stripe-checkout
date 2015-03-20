@@ -86,11 +86,8 @@ ready = function() {
 				};
 
 			img.src = '<%= asset_path('tick.png') %>';
-			function urlOfCurrentFile() {
-			  	var scripts = document.getElementsByTagName("script");
-			  	return scripts[scripts.length - 1].src;
-				}
-			$("#checkmark").wrap("<a href='urlOfCurrentFile()'></a>');
+		
+			$("#checkmark").wrap("<a href='<%= Rails.root_path %>'></a>");
 			}
 			
 	    clearInterval(myVar);
