@@ -75,11 +75,24 @@ ready = function() {
 
 	function myStopFunction() {
 		if (paid == true) {
-			document.getElementById('timer').innerHTML += 'Bitcoin payment received: thank you!';
+			document.getElementById('bitcoin-address').innerHTML += '</br>Bitcoin payment received: thank you!';
 			var element = document.getElementById("my-buttons");
 			element.parentNode.removeChild(element);
 			element = document.getElementById("paybycard");
 			element.parentNode.removeChild(element);
+			element = document.getElementById("qrcodeCanvas");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("pay-bitcoin");
+			element.parentNode.removeChild(element);
+			var elements = document.getElementsByClassName("progress");
+			elements[0].parentNode.removeChild(elements[0]);
+			
+			var textLink = document.getElementById('download-link');
+			var tlink = document.createElement('a'); // create the text link
+			    tlink.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
+			
+			textLink.innerHTML = 'Go to your download page';
+			textLink.appendChild(tlink);
 		
 			var img = new Image();  // checkmark image
 			var div = document.getElementById('checkmark');
@@ -87,14 +100,8 @@ ready = function() {
 			var link = document.createElement('a'); // create the image link
 			    link.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
 			
-			var textLink = document.getElementById('download-link');
-			textLink.innerHTML += 'Go to your download page'
-			var tlink = document.createElement('a'); // create the text link
-			    tlink.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
-			
 			img.onload = function() {
 				div.appendChild(link);
-				textLink.appendChild(tlink);
 			  	link.appendChild(img);
 				};
 
