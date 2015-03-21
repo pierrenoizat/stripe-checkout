@@ -3,7 +3,7 @@ ready = function() {
 
 
 	var opts = {
-	  lines: 8, // The number of lines to draw
+	  lines: 10, // The number of lines to draw
 	  length: 7, // The length of each line
 	  width: 3, // The line thickness
 	  radius: 5, // The radius of the inner circle
@@ -21,25 +21,29 @@ ready = function() {
 	  left: '50%' // Left position relative to parent
 	};
 	var target = document.getElementById('spinner');
-	var spinner = new Spinner(opts).spin(target);
+	// var spinner = new Spinner(opts).spin(target);
 	
-	var myVar = setInterval(function(){ myTimer() }, 3000); // check database value every 3 seconds
+	var myVar = setInterval(function(){ myTimer() }, 2500); // check database value every 2.5 seconds
 	var duration = 0;
-	var durationLimit = 20; // up to 60 seconds to pay
+	var durationLimit = 24; // up to 60 seconds to pay
+	var value = 0;
+	var pc = "0%"
 	var email = $('#timer').data('email')
 	var orderId = $('#timer').data('orderid')
-	// var orderId = "<%= Order.last.id %>"
 	var paid = false;
-	
+
 	function myTimer() {
 
 		if ((duration < durationLimit) && (paid == false)) {
 		    var d = new Date();
 		    var t = d.toLocaleTimeString();
 		    document.getElementById("timer").innerHTML = t;
-		
-			var response = "non"
-			var jsonResponse;
+			value = (duration/durationLimit)*100;
+			pc = "width:" + Math.round( value ).toString() + "%";
+			var progressBar = document.getElementsByClassName("progress-bar");
+			progressBar[0].setAttribute('aria-valuenow', value); // set value where value is between 0-100
+			progressBar[0].setAttribute("style",pc);
+			var response = "non";
 			
 			var xmlhttp = new XMLHttpRequest();
 			
@@ -58,13 +62,12 @@ ready = function() {
 				paid = true;
 			}
 			console.log(response.status);
-			console.log(email);
+			console.log(value);
 		
 		    duration++;
 		}
 		else {
 			myStopFunction();
-			
 			
 		}
 
@@ -75,11 +78,12 @@ ready = function() {
 			document.getElementById('timer').innerHTML += '<br>Bitcoin payment received: thank you!';
 			var element = document.getElementById("my-buttons");
 			element.parentNode.removeChild(element);
-			var element = document.getElementById("paybycard");
+			element = document.getElementById("paybycard");
 			element.parentNode.removeChild(element);
 		
 			var img = new Image();
 			var div = document.getElementById('checkmark');
+			
 			var link = document.createElement('a'); // create the link
 			    link.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
 
@@ -90,9 +94,24 @@ ready = function() {
 
 			img.src = '<%= asset_path('tick.png') %>';
 			}
+		else {  // Bitcoin invoice expired
+			var element = document.getElementById("qrcodeCanvas");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("label-bitcoin");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("bitcoin-address");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("paybycard");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("pay-bitcoin");
+			element.parentNode.removeChild(element);
+			var elements = document.getElementsByClassName("progress");
+			elements[0].parentNode.removeChild(elements[0]);
+			}
 			
 	    clearInterval(myVar);
-		spinner.stop(target);
+		// spinner.stop(target);
+		
 	}
 
 };

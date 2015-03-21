@@ -61,15 +61,15 @@
       </div>
 
 	<div class="form-group">
-        <label>Pay with Bitcoin :</label>
+        <label id="label-bitcoin">Pay with Bitcoin :</label>
       </div>
 
 	<% @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email } %>
   	<% @order = @orders.last %>
 	<div id="spinner" ></div>
-	<span>Dear <%= @user.email %>, please pay the following address within one minute:</span>
-	<%= @order.address %></br>
-	<span id="timer" data-email ="<%= @user.email %>" data-orderid ="<%= @order.id %>"></span></br>
+	
+	<span id="bitcoin-address"><%= @order.address %></span></br>
+	</br>
 	<ul></ul>
 	<span style="align:center;"><div id="qrcodeCanvas" data-qrcodestring = "<%= @order.qrcode_string %>" style="align:center;" ></div></span>
 <script>
@@ -1359,6 +1359,14 @@ QRBitBuffer.prototype = {
 	});
 
 </script>
+
+  <span id="pay-bitcoin">Please pay the above address within one minute:</span>
+  <div class="progress">
+    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+      <span id="timer" data-email ="<%= @user.email %>" data-orderid ="<%= @order.id %>" style="color:black;"></span>
+    </div>
+  </div>
+
 <br/>
 	<span id="paybycard">If you do not have bitcoins, please pay by card:</span>
 <br/><br/>
