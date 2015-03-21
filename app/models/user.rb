@@ -2,14 +2,15 @@ class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin]
   after_initialize :set_default_role, :if => :new_record?
   
-  before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
+  # before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
   
-  before_create :pay_with_card, unless: Proc.new { |user| user.admin? }
+  before_create :pay_with_card, unless: Proc.new { |user| user.admin? or user.bitcoin }
   
   # after_create :sign_up_for_mailing_list
 
   has_many :orders
   attr_accessor :stripeToken
+  # attr_accessor :login
   
   COUNTRIES = ["Afghanistan","Albania", "Algeria","Andorra", "Angola",
           "Argentina", "Armenia", "Australia", "Austria",

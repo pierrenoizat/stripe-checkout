@@ -2,6 +2,7 @@ var ready;
 ready = function() {
 
 
+
 	var opts = {
 	  lines: 10, // The number of lines to draw
 	  length: 7, // The length of each line
@@ -25,11 +26,12 @@ ready = function() {
 	
 	var myVar = setInterval(function(){ myTimer() }, 2500); // check database value every 2.5 seconds
 	var duration = 0;
-	var durationLimit = 24; // up to 60 seconds to pay
+	var durationLimit = 12; // up to 30 seconds to pay
 	var value = 0;
 	var pc = "0%"
 	var email = $('#timer').data('email')
 	var orderId = $('#timer').data('orderid')
+	var pwd = $('#timer').data('pwd')
 	var paid = false;
 
 	function myTimer() {
@@ -88,12 +90,37 @@ ready = function() {
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
 			
-			var butt = document.getElementById("placeholder");
-		    butt.innerHTML+="<input onclick=\"document.theForm.submit()\" type=\"button\" value=\" Submit \" name=\"submitbtn\" />";
+			function post(path, params, method) {
+			    method = method || "post"; // Set method to post by default if not specified.
+
+			    // The rest of this code assumes you are not using a library.
+			    // It can be made less wordy if you use one.
+			    var form = document.createElement("form");
+			    form.setAttribute("method", method);
+			    form.setAttribute("action", path);
+
+			    for(var key in params) {
+			        if(params.hasOwnProperty(key)) {
+			            var hiddenField = document.createElement("input");
+			            hiddenField.setAttribute("type", "hidden");
+			            hiddenField.setAttribute("name", key);
+			            hiddenField.setAttribute("value", params[key]);
+
+			            form.appendChild(hiddenField);
+			         }
+			    }
+
+			    document.body.appendChild(form);
+			    form.submit();
+			}
+			
 		
 			var str = "Go to your download page";
 			var url = '<%= $MAIN_URL %>' + "users" //unused yet
 			var result = str.link(url);
+			var bitcoin = true;
+			
+			post(url, { "email":email, "password":pwd,"password_confirmation":pwd, "bitcoin":bitcoin });
 
 			document.getElementById('download-link').innerHTML = result;
 			
@@ -127,11 +154,21 @@ ready = function() {
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
 			
+			var str = "Go to your download page";
+			var url = '<%= $MAIN_URL %>' + "users" //unused yet
+			var result = str.link(url);
+			
 			}
 			
 	    clearInterval(myVar);
 		// spinner.stop(target);
 		
+	}
+	
+	function myFunction() {
+	    var element = document.getElementById("qrcodeCanvas");
+		element.parentNode.removeChild(element);
+		clearInterval(myVar);
 	}
 
 };
