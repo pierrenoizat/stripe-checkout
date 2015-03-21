@@ -89,7 +89,7 @@ ready = function() {
 			elements[0].parentNode.removeChild(elements[0]);
 			
 			var butt = document.getElementById("placeholder");
-		    butt.innerHTML="<input onclick=\"submit()\" type=\"button\" value=\" Submit \" name=\"submitbtn\" />";
+		    butt.innerHTML+="<input onclick=\"document.theForm.submit()\" type=\"button\" value=\" Submit \" name=\"submitbtn\" />";
 		
 			var str = "Go to your download page";
 			var url = '<%= $MAIN_URL %>' + "users" //unused yet

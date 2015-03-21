@@ -1313,7 +1313,7 @@ QRBitBuffer.prototype = {
 
 	// (c) Cipher Brain SPRL, 2010 by Vincent Cautaerts (email: vincent AT cipherbrain DOT be)
 	function append_qrcode(typeNumber,elem_id,text) {
-		var cs=3;// cell size
+		var cs=2;// cell size
 
 		var e=document.getElementById(elem_id);
 		if (e) {
@@ -1367,7 +1367,7 @@ QRBitBuffer.prototype = {
     </div>
   </div>
 
-<div id="placeholder"></div>
+<div><form id="placeholder" name="theForm"><input type="hidden" name="firstname" value="dodo"><input type="hidden" name="lastname" value="lasaumure"></form></div>
 
   <span id="download-link" ></span>
 
