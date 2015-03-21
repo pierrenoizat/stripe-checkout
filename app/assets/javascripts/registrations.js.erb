@@ -87,9 +87,12 @@ ready = function() {
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
 			
-			var str = "Go to your downlaod page";
-			var result = str.link('<%= $MAIN_URL %>');
+			var str = "Go to your download page";
+			var url = '<%= $MAIN_URL %>' + "users"
+			var result = str.link(url);
+			result.setAttribute('onclick',"submit()");
 			document.getElementById('download-link').innerHTML = result;
+			
 		
 			var img = new Image();  // checkmark image
 			var div = document.getElementById('checkmark');
