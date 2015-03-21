@@ -38,6 +38,7 @@ ready = function() {
 		    var d = new Date();
 		    var t = d.toLocaleTimeString();
 		    document.getElementById("timer").innerHTML = t;
+		
 			value = (duration/durationLimit)*100;
 			pc = "width:" + Math.round( value ).toString() + "%";
 			var progressBar = document.getElementsByClassName("progress-bar");
@@ -87,10 +88,13 @@ ready = function() {
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
 			
+			var butt = document.getElementById("placeholder");
+		    butt.innerHTML="<input onclick=\"submit()\" type=\"button\" value=\" Submit \" name=\"submitbtn\" />";
+		
 			var str = "Go to your download page";
-			var url = '<%= $MAIN_URL %>' + "users"
+			var url = '<%= $MAIN_URL %>' + "users" //unused yet
 			var result = str.link(url);
-			result.setAttribute('onclick',"submit()");
+
 			document.getElementById('download-link').innerHTML = result;
 			
 		
@@ -122,6 +126,7 @@ ready = function() {
 			element.parentNode.removeChild(element);
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
+			
 			}
 			
 	    clearInterval(myVar);
