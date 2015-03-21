@@ -75,26 +75,34 @@ ready = function() {
 
 	function myStopFunction() {
 		if (paid == true) {
-			document.getElementById('timer').innerHTML += '<br>Bitcoin payment received: thank you!';
+			document.getElementById('timer').innerHTML += 'Bitcoin payment received: thank you!';
 			var element = document.getElementById("my-buttons");
 			element.parentNode.removeChild(element);
 			element = document.getElementById("paybycard");
 			element.parentNode.removeChild(element);
 		
-			var img = new Image();
+			var img = new Image();  // checkmark image
 			var div = document.getElementById('checkmark');
 			
-			var link = document.createElement('a'); // create the link
+			var link = document.createElement('a'); // create the image link
 			    link.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
-
+			
+			var textLink = document.getElementById('download-link');
+			textLink.innerHTML = 'Go to your download page'
+			var tlink = document.createElement('a'); // create the text link
+			    tlink.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
+			
 			img.onload = function() {
 				div.appendChild(link);
-		  		link.appendChild(img);
+				textLink.appendChild(tlink);
+			  	link.appendChild(img);
 				};
 
-			img.src = '<%= asset_path('tick.png') %>';
+			img.src = '<%= asset_path('tick_small.png') %>';
+			
 			}
 		else {  // Bitcoin invoice expired
+			
 			var element = document.getElementById("qrcodeCanvas");
 			element.parentNode.removeChild(element);
 			element = document.getElementById("label-bitcoin");
