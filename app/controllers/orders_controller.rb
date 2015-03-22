@@ -37,6 +37,7 @@ class OrdersController < ApplicationController
         @order.status = 'paid'
         @order.pay_type = 'bitcoin'
         @order.save
+        flash.now[:success] = 'Payment received! You signed up successfully.'
       end
       render :nothing => true, :status => 200, :content_type => 'text/html'
     end

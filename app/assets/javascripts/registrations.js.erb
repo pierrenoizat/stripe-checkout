@@ -23,10 +23,11 @@ ready = function() {
 	};
 	var target = document.getElementById('spinner');
 	// var spinner = new Spinner(opts).spin(target);
-	
-	var myVar = setInterval(function(){ myTimer() }, 2500); // check database value every 2.5 seconds
+	var increment = 1500;  // check database value every increment milliseconds
+	var myVar = setInterval(function(){ myTimer() }, increment);
 	var duration = 0;
-	var durationLimit = 240; // up to 10 minutes to pay
+	var durationLimit = 400; // up to 10 minutes to pay
+	var temps = durationLimit*increment/60000 ; // duration left in minutes
 	var value = 0;
 	var pc = "0%"
 	var email = $('#timer').data('email')
@@ -40,7 +41,9 @@ ready = function() {
 		    var d = new Date();
 		    var t = d.toLocaleTimeString();
 		    document.getElementById("timer").innerHTML = t;
-		
+			temps = (durationLimit-duration)*increment/60000 ;
+			document.getElementById('temps').innerHTML = Math.round( temps ).toString();
+			
 			value = (duration/durationLimit)*100;
 			pc = "width:" + Math.round( value ).toString() + "%";
 			var progressBar = document.getElementsByClassName("progress-bar");
