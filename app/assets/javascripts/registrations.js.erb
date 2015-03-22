@@ -23,23 +23,26 @@ ready = function() {
 	};
 	var target = document.getElementById('spinner');
 	// var spinner = new Spinner(opts).spin(target);
-	var increment = 1500;  // check database value every increment milliseconds
+	var increment = 1000;  // check database value every increment milliseconds
 	var myVar = setInterval(function(){ myTimer() }, increment);
 	var duration = 0;
-	var durationLimit = 400; // up to 10 minutes to pay
-	var temps = durationLimit*increment/60000 ; // duration left in minutes
+	var durationLimit = 600; // up to 10 minutes to pay
+	
 	var value = 0;
-	var pc = "0%"
-	var email = $('#timer').data('email')
-	var orderId = $('#timer').data('orderid')
-	var pwd = $('#timer').data('pwd')
+	var pc = "0%";
+	var email = $('#timer').data('email');
+	var orderId = $('#timer').data('orderid');
+	var pwd = $('#timer').data('pwd');
+	var expiry = $('#timer').data('expiry');  // time between order creation and expiry, in seconds
 	var paid = false;
+	durationLimit = parseInt(expiry);
+	var temps = durationLimit*increment/60000 ; // duration left in minutes
 
 	function myTimer() {
 
 		if ((duration < durationLimit) && (paid == false)) {
 		    var d = new Date();
-		    var t = d.toLocaleTimeString();
+		    var t = d.toLocaleTimeString().substring(0,8);  // keep only first 8 characters
 		    document.getElementById("timer").innerHTML = t;
 			temps = (durationLimit-duration)*increment/60000 ;
 			document.getElementById('temps').innerHTML = Math.round( temps ).toString();
@@ -81,7 +84,7 @@ ready = function() {
 
 	function myStopFunction() {
 		if (paid == true) {
-			document.getElementById('bitcoin-address').innerHTML += '</br>Bitcoin payment received: thank you!';
+			// document.getElementById('bitcoin-address').innerHTML += '</br>Bitcoin payment received: thank you!';
 			var element = document.getElementById("my-buttons");
 			/*
 			element.parentNode.removeChild(element);

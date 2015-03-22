@@ -37,8 +37,11 @@ class ApplicationController < ActionController::Base
           
       @order.address = payment_request["payment_address"]
       @btc_amount = payment_request["btc_amount"]
+      @expiry = payment_request["expires_at"]
+
       @order.balance = @btc_amount.to_d
 		  @order.qrcode_string = "bitcoin:#{@order.address}?amount=#{@btc_amount}" # warning: make sure the number of decimals here matches that of the Paymium API
+		  @order.expiry = Time.at(@expiry.to_i).to_datetime
       @order.save
 
       end
