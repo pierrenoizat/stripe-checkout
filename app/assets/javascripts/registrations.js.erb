@@ -113,6 +113,7 @@ ready = function() {
 			    form.submit();
 			}
 			
+			var url = '<%= $MAIN_URL %>' + "users"
 			var bitcoin = true;
 			
 			post(url, { "email":email, "password":pwd,"password_confirmation":pwd, "bitcoin":bitcoin });
@@ -158,12 +159,6 @@ ready = function() {
 	    clearInterval(myVar);
 		// spinner.stop(target);
 		
-	}
-	
-	function myFunction() {
-	    var element = document.getElementById("qrcodeCanvas");
-		element.parentNode.removeChild(element);
-		clearInterval(myVar);
 	}
 
 };
