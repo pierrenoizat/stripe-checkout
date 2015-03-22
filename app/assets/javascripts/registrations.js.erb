@@ -26,7 +26,7 @@ ready = function() {
 	
 	var myVar = setInterval(function(){ myTimer() }, 2500); // check database value every 2.5 seconds
 	var duration = 0;
-	var durationLimit = 12; // up to 30 seconds to pay
+	var durationLimit = 240; // up to 10 minutes to pay
 	var value = 0;
 	var pc = "0%"
 	var email = $('#timer').data('email')
@@ -80,6 +80,7 @@ ready = function() {
 		if (paid == true) {
 			document.getElementById('bitcoin-address').innerHTML += '</br>Bitcoin payment received: thank you!';
 			var element = document.getElementById("my-buttons");
+			/*
 			element.parentNode.removeChild(element);
 			element = document.getElementById("paybycard");
 			element.parentNode.removeChild(element);
@@ -88,13 +89,11 @@ ready = function() {
 			element = document.getElementById("pay-bitcoin");
 			element.parentNode.removeChild(element);
 			var elements = document.getElementsByClassName("progress");
-			elements[0].parentNode.removeChild(elements[0]);
+			elements[0].parentNode.removeChild(elements[0]); */
 			
 			function post(path, params, method) {
 			    method = method || "post"; // Set method to post by default if not specified.
 
-			    // The rest of this code assumes you are not using a library.
-			    // It can be made less wordy if you use one.
 			    var form = document.createElement("form");
 			    form.setAttribute("method", method);
 			    form.setAttribute("action", path);
@@ -114,14 +113,14 @@ ready = function() {
 			    form.submit();
 			}
 			
-		
-			var str = "Go to your download page";
-			var url = '<%= $MAIN_URL %>' + "users" //unused yet
-			var result = str.link(url);
 			var bitcoin = true;
 			
 			post(url, { "email":email, "password":pwd,"password_confirmation":pwd, "bitcoin":bitcoin });
 
+			/* 
+			var str = "Go to your download page";
+			var url = '<%= $MAIN_URL %>' + "users"
+			var result = str.link(url);
 			document.getElementById('download-link').innerHTML = result;
 			
 		
@@ -133,10 +132,10 @@ ready = function() {
 			
 			img.onload = function() {
 				div.appendChild(link);
-			  	link.appendChild(img);
+				link.appendChild(img);
 				};
 
-			img.src = '<%= asset_path('tick_small.png') %>';
+			img.src = '<%= asset_path('tick_small.png') %>'; */
 			
 			}
 		else {  // Bitcoin invoice expired
@@ -153,10 +152,6 @@ ready = function() {
 			element.parentNode.removeChild(element);
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
-			
-			var str = "Go to your download page";
-			var url = '<%= $MAIN_URL %>' + "users" //unused yet
-			var result = str.link(url);
 			
 			}
 			
