@@ -16,6 +16,14 @@ Rails.application.routes.draw do
 	
 	resources :charges
   resources :orders
+  # resources :products
+  
+  resources :products do
+      member do
+        get 'purchase'
+        end
+      end
+  
   resources :users
   root :to => 'visitors#index'
 end

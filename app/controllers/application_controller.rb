@@ -6,17 +6,19 @@ class ApplicationController < ActionController::Base
   
   before_action :configure_permitted_parameters, if: :devise_controller?
   
-  def create_order(email)
+  def create_order(user)
     
     require 'bigdecimal'
     require 'bigdecimal/util'
     
-    @amount = $PRODUCT_PRICE.to_i/100.0 # price in EUR
+    @product = Product.find_by_id(params[:user][:product_id])
+    
+    @amount = @product.price.to_i/100.0 # price in EUR
     
     @order = Order.create(
-      :email => email,
+      :email => user.email,
       :amount => "#{@amount}",
-      :content => "#{Rails.application.secrets.product_title}",
+      :content => "#{@product.title}",
       :currency    => 'eur',
       :status    => 'pending'
       )
@@ -51,7 +53,7 @@ class ApplicationController < ActionController::Base
   protected
   
   def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :remember_me) }
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :remember_me, :product_id) }
       devise_parameter_sanitizer.for(:sign_in) { |u| u.permit( :email, :password, :remember_me) }
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password) }
     end

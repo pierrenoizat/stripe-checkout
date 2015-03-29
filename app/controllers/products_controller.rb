@@ -1,9 +1,16 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :identify_product
+  before_filter :authenticate_user!, :except => :purchase
+  before_filter :identify_product, :except => :purchase
 
   def show
     send_file @path, :disposition => "attachment; filename=#{@file}"
+  end
+  
+  def purchase
+    @products = Product.where(id: params[:id]).to_a
+    # @products = Product.find_all_by_id(params[:id])
+    # @products = Product.all.select { |m| m.id == @product.id }
+    render "visitors/index"
   end
 
   private

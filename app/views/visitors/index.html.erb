@@ -8,14 +8,60 @@
     <%= link_to 'Download PDF', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
   <% end %>
 <% else %>
-  <h3>Purchase the book.</h3>
-  <article>
-    <label class="amount">
-      <%= image_tag 'rubyonrails.png', size: '60x60' %>
-      <div><%= Rails.application.secrets.product_title %></div>
-      <span><%= number_to_currency($PRODUCT_PRICE.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></span>
-    </label>
-    <%= render :partial => 'purchase' %>
-  </article>
+	<% if @products.count == 1 %>
+	
+	<h3>Purchase your membership</h3>
+
+	<div class="container-fluid">
+
+
+		<div class="row" >
+
+			<div class="col-md-12" >
+
+				<div class="col-md-3" >
+					<% @products.each do |product| %>
+    				<span><%= image_tag 'logo_bitcoin_france.png', size: '120x120', style: "align:center;" %></span>
+
+					<article style="text-align:center;">
+					<%= product.title %></br></br>
+					<%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
+						 <%= render partial: "visitors/purchase", locals: { :product => product } %>
+					</article>
+					<% end %>
+
+    			</div>
+
+
+			</div></br></br>
+
+		</div>
+
+	</div>
+	
+	<% else %>
+  		<h3>Join us: select your membership</h3>
+
+		<div class="container-fluid">
+	
+	
+			<div class="row" >
+			<% @products.each_slice(4) do |products_for_row| %>
+				<div class="col-md-12" >
+				<% products_for_row.each do |product| %>
+					<div class="col-md-3" >
+
+	    			<%= render product %>
+
+	    			</div>
+
+				<% end %>
+				</div></br></br>
+			<% end %>
+			</div>
+
+		</div>
+		<% end %>
+
 <% end %>
 

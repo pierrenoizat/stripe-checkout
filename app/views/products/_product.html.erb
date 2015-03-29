@@ -1,0 +1,9 @@
+
+</br></br>
+<span><%= image_tag 'logo_bitcoin_france.png', size: '120x120', style: "align:center;" %></span>
+
+<article style="text-align:center;">
+<%= product.title %></br></br>
+<%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
+	<%= link_to 'Sign up',purchase_product_path(product), :class => 'btn btn-primary btn-small' %>
+</article></br></br>

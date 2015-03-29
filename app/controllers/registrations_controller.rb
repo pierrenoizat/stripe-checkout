@@ -3,6 +3,7 @@ class RegistrationsController < Devise::RegistrationsController
   skip_before_filter :verify_authenticity_token, :except => [:pay]
   
   def pay
+    @product = Product.find_by_id(params[:user][:product_id])
     @user = User.new
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]
@@ -14,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_session_path
     else
     #if verify_recaptcha :private_key => Rails.application.secrets.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
-      create_order(@user.email)
+      create_order(@user)
       # render :new  # form with payment options
       
       respond_to do |format|

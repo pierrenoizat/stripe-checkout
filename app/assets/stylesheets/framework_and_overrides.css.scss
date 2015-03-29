@@ -8,8 +8,15 @@ img {
   margin: 0 auto;
   }
 // override for the 'Home' navigation link
+
+.navbar {
+  font-size: inherit;
+  background-color: rgb(46,84,112); // dark blue
+  }
+
 .navbar-brand {
   font-size: inherit;
+  background-color: rgb(46,84,112);
   }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
@@ -35,7 +42,7 @@ img {
 // to make views framework-neutral
 main {
   @extend .container;
-  background-color: #eee;
+  background-color: rgb(89,186,242); /* bright turquoise  #eee; */
   padding-bottom: 80px;
   width: 100%;
   margin-top: 51px; // accommodate the navbar

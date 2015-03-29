@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  enum role: [:user, :vip, :admin]
+  enum role: [:user, :vip, :admin, :corporate, :startup]
   after_initialize :set_default_role, :if => :new_record?
   
   # before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
