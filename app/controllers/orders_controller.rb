@@ -4,6 +4,7 @@ class OrdersController < ApplicationController
   
     def show
       @order = Order.find(params[:id])
+      @user = User.find_by_id(@order.user_id)
       
       respond_to do |format|
               format.json
@@ -44,7 +45,7 @@ class OrdersController < ApplicationController
 
   private
     def secure_params
-      params.require(:order).permit(:name, :address, :email, :amount, :status, :balance, :pay_type)
+      params.require(:order).permit(:name, :address, :email, :amount, :status, :balance, :pay_type, :user_id)
     end
   
   

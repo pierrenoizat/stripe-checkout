@@ -56,7 +56,7 @@ ready = function() {
 			
 			var xmlhttp = new XMLHttpRequest();
 			
-			var url = "<%= $ORDERS_URL %>" + orderId;
+			var url = "<%= $ORDERS_URL %>" + orderId; // calls show action in orders controller to fetch the status attribute
 
 			xmlhttp.onreadystatechange = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {

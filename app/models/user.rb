@@ -42,12 +42,14 @@ class User < ActiveRecord::Base
 
   def set_default_role
     self.role ||= :user
+    self.bitcoin ||= false
   end
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
          
   def pay_with_bitcoin
     
@@ -61,6 +63,7 @@ class User < ActiveRecord::Base
   def pay_with_card
     
     @orders = Order.order("created_at ASC").all.select { |m| m.email == self.email }
+
     @order = @orders.last
 
     if @order.pay_type == "card"

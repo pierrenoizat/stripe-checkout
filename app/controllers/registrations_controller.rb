@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
-  skip_before_filter :verify_authenticity_token, :except => [:pay]
+  skip_before_filter :verify_authenticity_token, :except => [:pay, :create]
   
   def pay
     @product = Product.find_by_id(params[:user][:product_id])
@@ -8,6 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]
     @user.password_confirmation = params[:user][:password_confirmation]
+    @user.product_id = params[:user][:product_id]
     
     @users = User.order("created_at ASC").all.select { |m| m.email == @user.email }
     
@@ -41,27 +42,48 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def create
-    if params[:bitcoin]
+    if !params[:bitcoin].blank? # reminder: false is blank
       @user = User.new
       @user.email = params[:email]
       @user.password = params[:password]
       @user.password_confirmation = params[:password]
       @user.bitcoin = params[:bitcoin]
       @user.save!
-      sign_in(:user, @user)
-      flash.now[:success] = 'Payment received! You signed up successfully.'
-      redirect_to after_sign_in_path_for(@user)
+      @orders = Order.all.select { |m| m.email == @user.email }
+      @order = @orders.last
+      @order.user_id = @user.id
+      @order.save
+      # sign_in(:user, @user)
+      flash.now[:success] = 'Bitcoin payment received! You signed up successfully.'
+      redirect_to after_sign_up_path_for(@user)
     else
       params[:user][:email] = params[:stripeEmail]
       params[:user][:stripeToken] = params[:stripeToken]
-      super
-    end
       
-
+      @user = User.new
+      @user.email = params[:user][:email]
+      @user.password = params[:user][:password]
+      @user.password_confirmation = params[:user][:password_confirmation]
+      @user.bitcoin = false
+      @user.stripeToken = params[:user][:stripeToken]
+      # @orders = Order.all.select { |m| m.email == @user.email }
+      # @order = @orders.last
+      # @order.user_id = @user.id
+      # @order.save
+      # sign_in(:user, @user)
+      # redirect_to after_sign_up_path_for(@user)
+      super
+      
+    end
   end
  
  
   protected
+  
+  def after_sign_up_path_for(resource)
+      download_user_path(resource)
+    end
+  
   def configure_permitted_parameters
       devise_parameter_sanitizer.for(:sign_up).push(:email, :stripeToken, :password)
   end

@@ -1369,7 +1369,7 @@ QRBitBuffer.prototype = {
   <span id="download-link" ></span>
 
 <br/>
-	<span id="paybycard">If you do not have bitcoins, please pay by card:</span>
+	<span id="paybycard">If you are old fashioned and do not have bitcoins, please pay by card:</span>
 <br/><br/>
 <div id="my-buttons">
       <%= f.submit '1. Sign up', :class => 'button left', :disabled => 'disabled' %>
@@ -1379,7 +1379,7 @@ QRBitBuffer.prototype = {
         data-email="<%= @user.email %>"
         data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
         data-description="<%= Rails.application.secrets.product_title %>"
-        data-amount="<%= @order.amount %>"
+        data-amount="<%= @order.amount*100 %>"
 		onclick="myFunction()"
 		>
        </script>

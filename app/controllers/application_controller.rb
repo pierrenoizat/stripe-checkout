@@ -50,10 +50,21 @@ class ApplicationController < ActionController::Base
     
   end
   
+  
+  
   protected
   
+  def after_sign_in_path_for(resource)
+    stored_location_for(resource) ||
+      if resource.is_a?(User)
+        user_path(resource)
+      else
+        super
+      end
+  end
+  
   def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :remember_me, :product_id) }
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :remember_me, :product_id, :bitcoin) }
       devise_parameter_sanitizer.for(:sign_in) { |u| u.permit( :email, :password, :remember_me) }
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password) }
     end

@@ -13,12 +13,8 @@
 	<h3>Purchase your membership</h3>
 
 	<div class="container-fluid">
-
-
 		<div class="row" >
-
 			<div class="col-md-12" >
-
 				<div class="col-md-3" >
 					<% @products.each do |product| %>
     				<span><%= image_tag 'logo_bitcoin_france.png', size: '120x120', style: "align:center;" %></span>
@@ -29,22 +25,16 @@
 						 <%= render partial: "visitors/purchase", locals: { :product => product } %>
 					</article>
 					<% end %>
-
     			</div>
 
-
 			</div></br></br>
-
 		</div>
-
 	</div>
 	
 	<% else %>
   		<h3>Join us: select your membership</h3>
 
 		<div class="container-fluid">
-	
-	
 			<div class="row" >
 			<% @products.each_slice(4) do |products_for_row| %>
 				<div class="col-md-12" >
@@ -54,12 +44,10 @@
 	    			<%= render product %>
 
 	    			</div>
-
 				<% end %>
 				</div></br></br>
 			<% end %>
 			</div>
-
 		</div>
 		<% end %>
 
