@@ -1,10 +1,10 @@
-<h3>Welcome</h3>
 <% if user_signed_in? %>
   <% if current_user.admin? %>
     <h3>Admin</h3>
     <p><%= link_to 'User count:', users_path %> <%= User.count %></p>
   <% else %>
-    <h4>You signed up with <%= current_user.product_id if current_user.product_id %></h4>
+	<h3>Welcome</h3>
+    <h4>You signed up with <%= Product.find_by_id(current_user.product_id).title if current_user.product_id %></h4>
 	<p>Email: <%= current_user.email if current_user.email %></p>
 	<h4>Download the book.</h4>
     <%= link_to 'Download PDF', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>

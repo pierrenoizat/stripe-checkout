@@ -36,7 +36,7 @@ ready = function() {
 	var expiry = $('#timer').data('expiry');  // time between order creation and expiry, in seconds
 	var paid = false;
 	durationLimit = parseInt(expiry);
-	var temps = durationLimit*increment/60000 ; // duration left in minutes
+	var temps = 15; // duration left in minutes
 
 	function myTimer() {
 
@@ -44,7 +44,7 @@ ready = function() {
 		    var d = new Date();
 		    var t = d.toLocaleTimeString().substring(0,8);  // keep only first 8 characters
 		    document.getElementById("timer").innerHTML = t;
-			temps = (durationLimit-duration)*increment/60000 ;
+			temps = (durationLimit-duration)*increment/60000 ;  // time left in minutes
 			document.getElementById('temps').innerHTML = Math.round( temps ).toString();
 			
 			value = (duration/durationLimit)*100;

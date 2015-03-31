@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   enum role: [:user, :vip, :admin, :corporate, :startup]
   after_initialize :set_default_role, :if => :new_record?
   
-  # before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
+  before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
   
   before_create :pay_with_card, unless: Proc.new { |user| user.admin? or user.bitcoin }
   
@@ -50,7 +50,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def pay_with_bitcoin
+    
+    @orders = Order.order("created_at ASC").all.select { |m| m.email == self.email }
 
+    @order = @orders.last
+    @products = Product.all.select { |m| m.title == @order.content }
+    @product = @products.last
+    self.product_id = @product.id
+    
+  end
 
   def pay_with_card
     

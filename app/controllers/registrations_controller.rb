@@ -54,7 +54,8 @@ class RegistrationsController < Devise::RegistrationsController
       @order = @orders.last
       @order.user_id = @user.id
       @order.save
-
+      
+      flash[:success] = "Bitcoin payment received!"
       redirect_to after_sign_up_path_for(@user), :flash => { :success => "Bitcoin payment received! You signed up successfully."}
     else
       params[:user][:email] = params[:stripeEmail]
