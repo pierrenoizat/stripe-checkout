@@ -1,6 +1,6 @@
 class RegistrationsController < Devise::RegistrationsController
   before_filter :configure_permitted_parameters
-  skip_before_filter :verify_authenticity_token, :except => [:pay, :create]
+  skip_before_filter :verify_authenticity_token, :except => [:pay]
   
   def pay
     @product = Product.find_by_id(params[:user][:product_id])
@@ -53,7 +53,7 @@ class RegistrationsController < Devise::RegistrationsController
       @order = @orders.last
       @order.user_id = @user.id
       @order.save
-      # sign_in(:user, @user)
+      # sign_in(:user, @user) 
       flash.now[:success] = 'Bitcoin payment received! You signed up successfully.'
       redirect_to after_sign_up_path_for(@user)
     else

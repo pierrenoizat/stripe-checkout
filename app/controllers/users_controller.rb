@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => :download
-  # before_filter :admin_only, :except => :show
-  # before_filter :admin_only, :except => :download
+  before_action :authenticate_user!, :except => [:download,:show]
+  before_filter :admin_only, :except => [:download,:show]
 
   def download
     @user = User.find(params[:id])
