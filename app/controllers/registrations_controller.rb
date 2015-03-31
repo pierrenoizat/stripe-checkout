@@ -3,7 +3,14 @@ class RegistrationsController < Devise::RegistrationsController
   skip_before_filter :verify_authenticity_token, :except => [:pay]
   
   def pay
-    @product = Product.find_by_id(params[:user][:product_id])
+    
+    if params[:user]
+      product_id = params[:user][:product_id]  # to deal with case of sign up errors and customer click on pay button a second time
+    end
+    
+    @product = Product.find_by_id(product_id)
+    if @product
+      
     @user = User.new
     @user.email = params[:user][:email]
     @user.password = params[:user][:password]
@@ -13,32 +20,26 @@ class RegistrationsController < Devise::RegistrationsController
     @users = User.order("created_at ASC").all.select { |m| m.email == @user.email }
     
     if !@users.blank?
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path  # email is already taken
     else
     #if verify_recaptcha :private_key => Rails.application.secrets.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
-      create_order(@user)
+      # create_order(@user)
       # render :new  # form with payment options
-      
+      if create_order(@user)
       respond_to do |format|
           # that will mean to send a javascript code to client-side;
           format.js { render :action => "new" }
           format.html { render :action => "new" }
         end
+      else
+        redirect_to root_url, :flash => { :info => "An error prevented you from signing up. Please try again now." }
+      end
     end
-    #else
-    #  render "visitors/index" 
-    #end
+    else
+      redirect_to root_url, :flash => { :info => "An error prevented you from signing up. Please try again now." }
+    end
   end
   
-  
-  # def new
-  #  @user = User.new
-  #  respond_to do |format|
-  #      format .js  { @user = current_user }
-  #      format .html
-  #  end
-    
-  #end 
 
 
   def create
@@ -53,9 +54,8 @@ class RegistrationsController < Devise::RegistrationsController
       @order = @orders.last
       @order.user_id = @user.id
       @order.save
-      # sign_in(:user, @user) 
-      flash.now[:success] = 'Bitcoin payment received! You signed up successfully.'
-      redirect_to after_sign_up_path_for(@user)
+
+      redirect_to after_sign_up_path_for(@user), :flash => { :success => "Bitcoin payment received! You signed up successfully."}
     else
       params[:user][:email] = params[:stripeEmail]
       params[:user][:stripeToken] = params[:stripeToken]
@@ -66,8 +66,11 @@ class RegistrationsController < Devise::RegistrationsController
       @user.password_confirmation = params[:user][:password_confirmation]
       @user.bitcoin = false
       @user.stripeToken = params[:user][:stripeToken]
-      # @orders = Order.all.select { |m| m.email == @user.email }
-      # @order = @orders.last
+      @orders = Order.all.select { |m| m.email == @user.email }
+      @order = @orders.last
+      @products = Product.all.select { |m| m.title == @order.content }
+      @product = @products.last
+      @user.product_id = @product.id
       # @order.user_id = @user.id
       # @order.save
       # sign_in(:user, @user)

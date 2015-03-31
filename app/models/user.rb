@@ -49,14 +49,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-         
-         
-  def pay_with_bitcoin
-    
-    @orders = Order.order("created_at ASC").all.select { |m| m.email == self.email }
-    @order = @orders.last
-    
-  end
 
 
 
@@ -76,19 +68,16 @@ class User < ActiveRecord::Base
       :email => self.email,
       :card  => self.stripeToken
     )
-    price = $PRODUCT_PRICE
-    title = Rails.application.secrets.product_title
+    price = (@order.amount*100).to_i
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => "#{price}",
-      :description => "#{title}",
+      :description => "#{@order.content}",
       :currency    => 'eur'
     )
      
     if charge[:paid] == true
       @order.update_attributes(
-      :content => "#{title}",
-      :currency    => 'eur',
       :pay_type => 'card',
       :status => 'paid'
       )

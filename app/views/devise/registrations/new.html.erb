@@ -1378,8 +1378,8 @@ QRBitBuffer.prototype = {
         data-label="2. Pay with card"
         data-email="<%= @user.email %>"
         data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
-        data-description="<%= Rails.application.secrets.product_title %>"
-        data-amount="<%= @order.amount*100 %>"
+        data-description="<%= @order.content %>"
+        data-amount="<%= @order.amount*100.to_i %>"
 		onclick="myFunction()"
 		>
        </script>

@@ -13,6 +13,7 @@ class ApplicationController < ActionController::Base
     
     @product = Product.find_by_id(params[:user][:product_id])
     
+    if @product
     @amount = @product.price.to_i/100.0 # price in EUR
     
     @order = Order.create(
@@ -47,6 +48,9 @@ class ApplicationController < ActionController::Base
       @order.save
 
       end
+    else
+      @order = nil
+    end
     
   end
   
