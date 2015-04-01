@@ -23,7 +23,7 @@ ready = function() {
 	};
 	var target = document.getElementById('spinner');
 	// var spinner = new Spinner(opts).spin(target);
-	var increment = 1000;  // check database value every increment milliseconds
+	var increment = 1500;  // check database value every increment milliseconds
 	var myVar = setInterval(function(){ myTimer() }, increment);
 	var duration = 0;
 	var durationLimit = 600; // up to 10 minutes to pay
@@ -35,14 +35,14 @@ ready = function() {
 	var pwd = $('#timer').data('pwd');
 	var expiry = $('#timer').data('expiry');  // time between order creation and expiry, in seconds
 	var paid = false;
-	durationLimit = parseInt(expiry);
+	durationLimit = parseInt(expiry)*1000/increment;
 	var temps = 15; // duration left in minutes
 
 	function myTimer() {
 
 		if ((duration < durationLimit) && (paid == false)) {
 		    var d = new Date();
-		    var t = d.toLocaleTimeString().substring(0,8);  // keep only first 8 characters
+		    var t = d.toLocaleTimeString().substring(0,8);  // keep only leftmost 8 characters
 		    document.getElementById("timer").innerHTML = t;
 			temps = (durationLimit-duration)*increment/60000 ;  // time left in minutes
 			document.getElementById('temps').innerHTML = Math.round( temps ).toString();
