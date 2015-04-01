@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
 
   has_many :orders
   attr_accessor :stripeToken
-  # attr_accessor :login
   
   COUNTRIES = ["Afghanistan","Albania", "Algeria","Andorra", "Angola",
           "Argentina", "Armenia", "Australia", "Austria",

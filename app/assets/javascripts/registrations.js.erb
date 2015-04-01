@@ -23,10 +23,10 @@ ready = function() {
 	};
 	var target = document.getElementById('spinner');
 	// var spinner = new Spinner(opts).spin(target);
-	var increment = 1500;  // check database value every increment milliseconds
+	var increment = 2000;  // check database value every increment milliseconds
 	var myVar = setInterval(function(){ myTimer() }, increment);
 	var duration = 0;
-	var durationLimit = 600; // up to 10 minutes to pay
+	var durationLimit = 900; // up to 15 minutes to pay by default
 	
 	var value = 0;
 	var pc = "0%";

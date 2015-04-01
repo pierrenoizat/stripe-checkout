@@ -66,11 +66,11 @@
 
 	<% @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email } %>
   	<% @order = @orders.last %>
-	<div id="spinner" ></div>
+	<div id="spinner" style="width:100%;text-align:center;">
 	
-	<span id="bitcoin-address"><%= @order.address %></span></br>
+	<span id="bitcoin-address" style="display:inline;"><%= @order.address %></span></div></br>
 	</br>
-	<span style="align:center;"><div id="qrcodeCanvas" data-qrcodestring = "<%= @order.qrcode_string %>" style="align:center;" ></div></span>
+	<div id="qrcodeCanvas" data-qrcodestring = "<%= @order.qrcode_string %>" style="width:100%;text-align:center;" ></div>
 <script>
 //---------------------------------------------------------------------
 // QRCode for JavaScript
@@ -1330,6 +1330,8 @@ QRBitBuffer.prototype = {
 
 			canvas.setAttribute('width',qr.getModuleCount()*cs);
 			canvas.setAttribute('height',qr.getModuleCount()*cs);
+
+			canvas.setAttribute('display',"inline");
 			e.appendChild(canvas);
 
 			if (canvas.getContext){
@@ -1380,6 +1382,7 @@ QRBitBuffer.prototype = {
         data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
         data-description="<%= @order.content %>"
         data-amount="<%= @order.amount*100.to_i %>"
+		data-currency="<%= @order.currency %>"
 		onclick="myFunction()"
 		>
        </script>

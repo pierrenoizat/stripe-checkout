@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
       :email => user.email,
       :amount => "#{@amount}",
       :content => "#{@product.title}",
-      :currency    => 'eur',
+      :currency    => 'EUR',
       :status    => 'pending'
       )
       

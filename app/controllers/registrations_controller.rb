@@ -55,7 +55,7 @@ class RegistrationsController < Devise::RegistrationsController
       @order.user_id = @user.id
       @order.save
       
-      redirect_to after_sign_up_path_for(@user), :flash => { :success => "Bitcoin payment received! You signed up successfully."}
+      redirect_to after_sign_up_path_for(@user), notice: "Bitcoin payment received, thank you! You signed up successfully."
     else
       params[:user][:email] = params[:stripeEmail]
       params[:user][:stripeToken] = params[:stripeToken]
@@ -75,6 +75,11 @@ class RegistrationsController < Devise::RegistrationsController
       # @order.save
       # sign_in(:user, @user)
       # redirect_to after_sign_up_path_for(@user)
+      if @user.password
+        if @user.password.length > 5 and @user.password == @user.password_confirmation
+        flash.now[:notice] = "Card payment received, thank you! You signed up successfully."  # does NOT work !
+        end
+      end
       super
       
     end
