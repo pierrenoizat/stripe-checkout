@@ -1373,15 +1373,18 @@ QRBitBuffer.prototype = {
 <br/>
 	<span id="paybycard">If you are old fashioned and do not have bitcoins, please pay by card:</span>
 <br/><br/>
+<% price = ((@order.amount*100).to_i > 50 ? (@order.amount*100).to_i : 50) %>
 <div id="my-buttons">
       <%= f.submit '1. Sign up', :class => 'button left', :disabled => 'disabled' %>
        <script src="https://checkout.stripe.com/v2/checkout.js"
         class="stripe-button"
         data-label="2. Pay with card"
-        data-email="<%= @user.email %>"
         data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+		data-image="<%= image_path('logo_bitcoin_france_transparent.png') %>"
+		data-email="<%= @user.email %>"
         data-description="<%= @order.content %>"
-        data-amount="<%= @order.amount*100.to_i %>"
+        data-amount="<%= price %>"
+
 		data-currency="<%= @order.currency %>"
 		onclick="myFunction()"
 		>

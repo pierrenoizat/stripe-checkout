@@ -76,10 +76,12 @@ class User < ActiveRecord::Base
       :email => self.email,
       :card  => self.stripeToken
     )
-    price = (@order.amount*100).to_i
+    
+    price = ((@order.amount*100).to_i > 50 ? (@order.amount*100).to_i : 50) # warning: Stripe requires amount to be at least 50 cents
+   
     charge = Stripe::Charge.create(
       :customer    => customer.id,
-      :amount      => "#{price}",
+      :amount      => "#{price}",  
       :description => "#{@order.content}",
       :currency    => 'eur'
     )

@@ -35,7 +35,7 @@ ready = function() {
 	var pwd = $('#timer').data('pwd');
 	var expiry = $('#timer').data('expiry');  // time between order creation and expiry, in seconds
 	var paid = false;
-	durationLimit = parseInt(expiry)*1000/increment;
+	durationLimit = parseInt(expiry)*1000/increment;  // in cycles
 	var temps = 15; // duration left in minutes
 
 	function myTimer() {
@@ -70,10 +70,11 @@ ready = function() {
 			if (response.status == "&quot;paid&quot;") {
 				paid = true;
 			}
-			console.log(response.status);
+			console.log(temps);
 			console.log(value);
 		
-		    duration++;
+		    duration = duration + 1.5; // tweaked to match the actual time, too slow with +1
+
 		}
 		else {
 			myStopFunction();
