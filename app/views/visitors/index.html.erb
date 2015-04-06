@@ -28,7 +28,7 @@
 			<div class="col-md-12" >
 				<div class="col-md-3" >
 					<% @products.each do |product| %>
-    				<span><%= image_tag 'logo_bitcoin_france.png', size: '120x120', style: "align:center;" %></span>
+    				<span><%= image_tag product.avatar.url(:medium, false), style: "float:left;" %></span>
 
 					<article style="text-align:center;">
 					<%= product.title %></br></br>
