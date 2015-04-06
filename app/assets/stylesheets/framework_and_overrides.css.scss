@@ -2,6 +2,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@fontAwesomeEotPath: asset-path("fontawesome-webfont.eot?v=3.0.2");
+@fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot?#iefix&v=3.0.2");
+@fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff?v=3.0.2");
+@fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf?v=3.0.2");
+@import 'font-awesome.css';
+
 // make all images responsive by default
 img {
   @extend .img-responsive;

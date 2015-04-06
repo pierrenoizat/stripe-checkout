@@ -12,6 +12,9 @@ gem 'jbuilder', '~> 2.0'
 # gem 'chunky_png' # to use pngqr
 # gem 'pngqr'
 
+gem 'rails-i18n'
+gem "font-awesome-rails"
+
 gem "ffi", "~> 1.2.0"
 gem "bitcoin-addrgen",'~> 0.0.2' # this version uses the ffi gem for bindings to GMP library instead of the previous gmp gem
 gem 'bitcoin-ruby', git: 'https://github.com/lian/bitcoin-ruby', branch: 'master', require: 'bitcoin'

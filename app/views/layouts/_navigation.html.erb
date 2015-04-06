@@ -14,6 +14,30 @@
     <div class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
         <%= render 'layouts/navigation_links' %>
+	  </ul>
+	
+	  <ul class="nav navbar-nav pull-right">
+		<li class="dropdown">
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><ul class="f32"><li class="flag <%= "#{set_flag_id(I18n.locale)}" %>"></li></ul></a>
+				<ul class="dropdown-menu">
+
+					<% names = { :fr => 'Français', :en =>'English' }.with_indifferent_access %>
+				    <% I18n.available_locales.each do |l| %>
+
+						<li class="locale">
+					    	<%= link_to({ :l => l, :r => params[:r] }) do %>
+					
+							<ul class="f32">
+							  <li class="flag <%= "#{set_flag_id(l)}" %>"></li></br><span><%= set_flag_string(l) %></span>
+							</ul>
+		
+							<% end %>
+
+						</li>
+						<% end %>
+						
+				</ul>
+		</li>
       </ul>
     </div>
   </div>

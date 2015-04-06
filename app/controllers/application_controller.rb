@@ -4,7 +4,34 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :create_order
   
+  helper_method :set_flag_id, :set_flag_string
+  
+  before_filter :set_locale
   before_action :configure_permitted_parameters, if: :devise_controller?
+  
+  def set_flag_id(value)
+    
+    @flag_id = "fr"
+		@flag_id = case value
+		 when :fr then "fr"
+		 when :en then "us"
+		 else "fr" 
+		 end
+		@flag_id
+    
+  end
+  
+  def set_flag_string(value)
+    
+    @flag_string = "Français"
+		@flag_string = case value
+		 when :fr then "Français"
+		 when :en then "English"
+		 else "Français" 
+		 end
+		@flag_string
+    
+  end
   
   def create_order(user)
     
@@ -57,6 +84,22 @@ class ApplicationController < ActionController::Base
   
   
   protected
+  
+  def set_locale
+    if params[:l] && I18n.available_locales.include?(params[:l].to_sym)
+      I18n.locale = params[:l]
+      session[:locale] = params[:l]
+    elsif session[:locale]
+      I18n.locale = session[:locale].to_sym
+    else
+      session[:locale] = I18n.default_locale
+    end
+  end
+
+
+  def default_url_options
+    { :locale => I18n.locale }
+    end
   
   def after_sign_in_path_for(resource)
     stored_location_for(resource) ||

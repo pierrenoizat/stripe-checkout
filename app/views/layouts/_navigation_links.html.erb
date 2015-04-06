@@ -4,7 +4,7 @@
   <% if current_user.admin? %>
 	<li><%= link_to 'Products', list_products_path %></li>
   <% end %>
-  
+
   <li><%= link_to 'Sign out', destroy_user_session_path, :method=>'delete' %></li>
 <% else %>
   <li><%= link_to 'Sign in', new_user_session_path %></li>
