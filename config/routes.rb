@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'products/:id', to: 'products#show', :as => :products
+  # get 'products/:id', to: 'products#show', :as => :products
 
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_scope :user do
@@ -17,13 +17,18 @@ Rails.application.routes.draw do
 	
 	resources :charges
   resources :orders
-  # resources :products
   
   resources :products do
       member do
         get 'purchase'
+        post 'document_download'
+        end
+      collection do
+        get 'list'
         end
       end
+      
+      
   resources :users do
       member do
         get 'download'

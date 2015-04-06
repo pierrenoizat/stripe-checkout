@@ -3,9 +3,9 @@ class VisitorsController < ApplicationController
   def index
     @products = Product.all.select { |m| m.stock != 0 }
     
-    if user_signed_in?
-      @products = Product.all.select { |m| (m.stock != 0 and m.id == current_user.product_id) }
-    end
+    #if user_signed_in?
+    #  @products = Product.all.select { |m| (m.stock != 0 and m.id == current_user.product_id) }
+    #end
     
   end
   

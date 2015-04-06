@@ -1373,7 +1373,7 @@ QRBitBuffer.prototype = {
 <br/>
 	<span id="paybycard">If you are old fashioned and do not have bitcoins, please pay by card:</span>
 <br/><br/>
-<% price = ((@order.amount*100).to_i > 50 ? (@order.amount*100).to_i : 50) %>
+<% price = ((@order.amount*100).to_i > $MIN_STRIPE_AMOUNT ? (@order.amount*100).to_i : $MIN_STRIPE_AMOUNT) %>
 <div id="my-buttons">
       <%= f.submit '1. Sign up', :class => 'button left', :disabled => 'disabled' %>
        <script src="https://checkout.stripe.com/v2/checkout.js"

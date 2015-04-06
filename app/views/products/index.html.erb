@@ -1,0 +1,6 @@
+<ul id='products'>
+	<h5><%= render @products %></h5>
+</ul>
+<% if current_user.admin? %>
+<%= link_to 'New product', new_product_path %>
+<% end %>

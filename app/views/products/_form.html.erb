@@ -1,0 +1,60 @@
+<%- model_class = Product -%>
+<%= form_for(@product, multipart: true) do |f| %>
+<% if @product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+      <% @product.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Title:' %>
+    <%= f.text_field :title %>
+  </div>
+<div class="field">
+    <%= f.label 'Description:' %>
+    <%= f.text_field :description, :style => "width: 450px;height: 100px;" %>
+  </div>
+<div class="field">
+    <%= f.label 'Price:' %>
+    <%= f.text_field :price %>
+  </div>
+<div class="field">
+    <%= f.label 'Category:' %>
+	<%= f.select :first_category, Product::CATEGORIES, :selected => "#{Product::CATEGORIES[0]}" %>
+  </div>
+
+<div class="field">
+    <%= f.label 'Photo*:' %>
+    <%= f.file_field :avatar %>
+  </div>
+
+<div class="field">
+    <%= f.label 'Document*:' %>
+    <%= f.file_field :document %>
+  </div>
+
+<div class="field">
+    <%= f.label 'Audio*:' %>
+    <%= f.file_field :audio %>
+  </div>
+
+<div class="field">
+    <%= f.label 'Video*:' %>
+    <%= f.file_field :video %>
+  </div>
+
+
+	
+<div class="actions">
+	<%= f.submit 'Create', class: "btn btn-primary btn-small", style: "background-color:blue;color:white;" %>
+	<%= link_to 'Cancel', products_path, class: 'btn btn-small', style: "background-color:gainsboro;color:black;" %>
+	  </div>
+	<% end %>
+<aside>* File image format: png, jpg</aside>
+<aside>* File image size: less than 500 kilobytes</aside>

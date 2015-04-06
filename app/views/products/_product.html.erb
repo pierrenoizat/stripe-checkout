@@ -1,9 +1,17 @@
 
 </br></br>
-<span><%= image_tag 'logo_bitcoin_france.png', size: '120x120', style: "align:center;" %></span></br>
+<!--<span><%= image_tag 'logo_bitcoin_france.png', size: '120x120', style: "align:center;" %></span></br>-->
+<span><%= image_tag product.avatar.url(:thumb) %></span>
 
 <article style="text-align:center;">
 <%= product.title %></br></br>
 <%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
-	<%= link_to 'Sign up',purchase_product_path(product), :class => 'btn btn-primary btn-small' %>
+	<% if current_user %>
+		<% if current_user.admin? %>
+			<%= link_to 'Edit',edit_product_path(product), :class => 'btn btn-primary btn-small' %>
+			<%= link_to "Delete", product_path(product), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-default btn-xs btn-danger' %>
+		<% end %>
+	<% else %>
+		<%= link_to 'Sign up',purchase_product_path(product), :class => 'btn btn-primary btn-small' %> 
+	<% end %>
 </article></br></br>

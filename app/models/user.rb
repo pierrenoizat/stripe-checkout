@@ -77,7 +77,7 @@ class User < ActiveRecord::Base
       :card  => self.stripeToken
     )
     
-    price = ((@order.amount*100).to_i > 50 ? (@order.amount*100).to_i : 50) # warning: Stripe requires amount to be at least 50 cents
+    price = ((@order.amount*100).to_i > $MIN_STRIPE_AMOUNT ? (@order.amount*100).to_i : $MIN_STRIPE_AMOUNT) # warning: Stripe requires amount to be at least 50 cents
    
     charge = Stripe::Charge.create(
       :customer    => customer.id,

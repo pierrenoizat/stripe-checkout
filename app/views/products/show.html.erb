@@ -1,0 +1,13 @@
+<p>
+	<%= image_tag @product.avatar.url(:square) %>
+</p>
+<p>
+	<%= @product.title %>
+</p>
+
+<b>Document:</b>
+<%= @product.document_file_name %>
+<b>Audio:</b>
+<%= @product.audio_file_name %>
+<b>Video:</b>
+<%= @product.video_file_name %>
