@@ -30,6 +30,11 @@
   </div>
 
 <div class="field">
+    <%= f.label 'Stock:' %>
+	<%= f.text_field :stock, :default => 1 %>
+  </div>
+
+<div class="field">
     <%= f.label 'Photo*:' %>
     <%= f.file_field :avatar %>
   </div>
@@ -52,7 +57,12 @@
 
 	
 <div class="actions">
-	<%= f.submit 'Create', class: "btn btn-primary btn-small", style: "background-color:blue;color:white;" %>
+	<% if @product.id %>
+		<%= f.submit 'Update', class: "btn btn-primary btn-small", style: "background-color:blue;color:white;" %>
+	<% else %>
+		<%= f.submit 'Create', class: "btn btn-primary btn-small", style: "background-color:blue;color:white;" %>
+	<% end %>
+	
 	<%= link_to 'Cancel', products_path, class: 'btn btn-small', style: "background-color:gainsboro;color:black;" %>
 	  </div>
 	<% end %>
