@@ -38,7 +38,7 @@
       "required": true
     },
     "DOMAIN_NAME": {
-      "description": "Required for sending mail. Give an app name or use a custom domain.",
+      "description": "Required for sending mail. Give an app name like paymium-stripe-checkout  or use a custom domain.",
       "value": "myapp.herokuapp.com",
       "required": false
     },

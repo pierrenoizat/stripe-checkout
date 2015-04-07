@@ -1,4 +1,4 @@
 AWS.config({
-    :access_key_id => 'AKIAISHH6QIJ3R7Q2HXQ',
-    :secret_access_key => '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'
+    :access_key_id => Figaro.env.access_key_id,
+    :secret_access_key => Figaro.env.secret_access_key
   })

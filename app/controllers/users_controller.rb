@@ -4,7 +4,9 @@ class UsersController < ApplicationController
 
   def download
     @user = User.find(params[:id])
-    sign_in(@user)
+    unless user_signed_in?
+      sign_in(@user)
+    end
     redirect_to root_url
   end
 

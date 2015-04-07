@@ -50,6 +50,7 @@ class RegistrationsController < Devise::RegistrationsController
       @user.password_confirmation = params[:password]
       @user.bitcoin = params[:bitcoin]
       @user.save!
+      # @user.save
       @orders = Order.all.select { |m| m.email == @user.email }
       @order = @orders.last
       @order.user_id = @user.id
