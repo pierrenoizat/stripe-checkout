@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         end
       collection do
         get 'list'
+        get 'store'
         end
       end
       

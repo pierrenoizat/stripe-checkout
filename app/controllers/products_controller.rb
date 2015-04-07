@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!, :except => :purchase
+  before_filter :authenticate_user!, :except => [:index, :list, :purchase, :store, :show]
   # before_filter :identify_product, :except => [:index, :list, :purchase, :new, :create,:document_download, :edit, :show]
   
   def document_download
@@ -41,6 +41,10 @@ class ProductsController < ApplicationController
   
   def index
     @products = Product.all
+  end
+  
+  def store
+    @products = Product.all.select { |m| m.stock != 0 and m.first_category != "membership" }
   end
   
   def new

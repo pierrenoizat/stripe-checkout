@@ -44,19 +44,25 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
     if !params[:bitcoin].blank? # reminder: false is blank
-      @user = User.new
-      @user.email = params[:email]
-      @user.password = params[:password]
-      @user.password_confirmation = params[:password]
-      @user.bitcoin = params[:bitcoin]
-      @user.save!
-      # @user.save
-      @orders = Order.all.select { |m| m.email == @user.email }
-      @order = @orders.last
-      @order.user_id = @user.id
-      @order.save
+      unless (params[:email] and User.find_by_email(params[:email]))  # in case create is called again after a successful sign up by card
+        @user = User.new
+        @user.email = params[:email]
+        @user.password = params[:password]
+        @user.password_confirmation = params[:password]
+        @user.bitcoin = params[:bitcoin]
+        @user.save!
+        # @user.save
+        @orders = Order.all.select { |m| m.email == @user.email }
+        @order = @orders.last
+        @order.user_id = @user.id
+        @order.save
       
-      redirect_to after_sign_up_path_for(@user), notice: "Bitcoin payment received, thank you! You signed up successfully."
+        redirect_to after_sign_up_path_for(@user), notice: "Bitcoin payment received, thank you! You signed up successfully."
+      else
+        @user = User.find_by_email(params[:email])
+        redirect_to after_sign_up_path_for(@user), notice: "Card payment received, thank you! You signed up successfully."
+      end
+      
     else
       params[:user][:email] = params[:stripeEmail]
       params[:user][:stripeToken] = params[:stripeToken]

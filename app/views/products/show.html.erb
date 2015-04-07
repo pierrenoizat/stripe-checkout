@@ -4,10 +4,16 @@
 <p>
 	<%= @product.title %>
 </p>
-
+<%= number_to_currency(@product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
+<b>Category:</b>
+<%= @product.first_category %></br>
+<b>Stock:</b>
+<%= @product.stock %></br>
+<b>Description:</b>
+<%= @product.description %></br>
 <b>Document:</b>
-<%= @product.document_file_name %>
+<%= @product.document_file_name %></br>
 <b>Audio:</b>
-<%= @product.audio_file_name %>
+<%= @product.audio_file_name %></br>
 <b>Video:</b>
-<%= @product.video_file_name %>
+<%= @product.video_file_name %></br>

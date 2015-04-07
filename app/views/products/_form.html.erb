@@ -18,7 +18,7 @@
   </div>
 <div class="field">
     <%= f.label 'Description:' %>
-    <%= f.text_field :description, :style => "width: 450px;height: 100px;" %>
+    <%= f.text_field :description, :style => "width: 450px;height: 100px;", :default => @product.description %>
   </div>
 <div class="field">
     <%= f.label 'Price:' %>
@@ -26,12 +26,12 @@
   </div>
 <div class="field">
     <%= f.label 'Category:' %>
-	<%= f.select :first_category, Product::CATEGORIES, :selected => "#{Product::CATEGORIES[0]}" %>
+	<%= f.select :first_category, Product::CATEGORIES, :selected => "#{@product.first_category}" %>
   </div>
 
 <div class="field">
     <%= f.label 'Stock:' %>
-	<%= f.text_field :stock, :default => 1 %>
+	<%= f.text_field :stock, :default => @product.stock %>
   </div>
 
 <div class="field">
@@ -67,4 +67,7 @@
 	  </div>
 	<% end %>
 <aside>* File image format: png, jpg</aside>
-<aside>* File image size: less than 500 kilobytes</aside>
+<aside>* Document file format: png, jpg, epub, pdf </aside>
+<aside>* Audio file format: mp3, mp4 </aside>
+<aside>* Video file format: mp4 </aside>
+<aside>* Attachment size: less than 1500 kilobytes</aside>
