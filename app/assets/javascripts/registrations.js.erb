@@ -1,8 +1,6 @@
 var ready;
 ready = function() {
 
-
-
 	var opts = {
 	  lines: 10, // The number of lines to draw
 	  length: 7, // The length of each line
@@ -62,10 +60,9 @@ ready = function() {
 			if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 			    response = JSON.parse(xmlhttp.responseText);
 			    }
-
 			}
 
-			xmlhttp.open("GET", url, false);  // false means synchronous, wait for the response
+			xmlhttp.open("GET", url, false);  // false means synchronous, wait for the response; true means asynchronous, don't wait
 			xmlhttp.send();
 			if (response.status == "&quot;paid&quot;") {
 				paid = true;
@@ -73,31 +70,19 @@ ready = function() {
 			console.log(temps);
 			console.log(value);
 		
-		    duration = duration + 1.5; // tweaked to match the actual time, too slow with +1
+		    duration = duration + (increment/1250) ; // tweaked to match the actual time, too slow with +1 ?
 
 		}
 		else {
 			myStopFunction();
 			
 		}
-
 	}
 
 	function myStopFunction() {
 		if (paid == true) {
-			// document.getElementById('bitcoin-address').innerHTML += '</br>Bitcoin payment received: thank you!';
-			var element = document.getElementById("my-buttons");
-			/*
-			element.parentNode.removeChild(element);
-			element = document.getElementById("paybycard");
-			element.parentNode.removeChild(element);
-			element = document.getElementById("qrcodeCanvas");
-			element.parentNode.removeChild(element);
-			element = document.getElementById("pay-bitcoin");
-			element.parentNode.removeChild(element);
-			var elements = document.getElementsByClassName("progress");
-			elements[0].parentNode.removeChild(elements[0]); */
-			
+
+			var element = document.getElementById("my-buttons");		
 			
 			function post(path, params, method) {
 			    method = method || "post"; // Set method to post by default if not specified.
@@ -125,31 +110,13 @@ ready = function() {
 			var bitcoin = true;
 			
 			post(url, { "email":email, "password":pwd,"password_confirmation":pwd, "bitcoin":bitcoin });
-
-			/* 
-			var str = "Go to your download page";
-			var url = '<%= $MAIN_URL %>' + "users"
-			var result = str.link(url);
-			document.getElementById('download-link').innerHTML = result;
-			
-		
-			var img = new Image();  // checkmark image
-			var div = document.getElementById('checkmark');
-			
-			var link = document.createElement('a'); // create the image link
-			    link.setAttribute('href', '<%= $MAIN_URL %>'); // set link path
-			
-			img.onload = function() {
-				div.appendChild(link);
-				link.appendChild(img);
-				};
-
-			img.src = '<%= asset_path('tick_small.png') %>'; */
 			
 			}
 		else {  // Bitcoin invoice expired
+			var element = document.getElementById("bitcoin-or");
+			element.innerHTML = "Pay with Card";
 			
-			var element = document.getElementById("qrcodeCanvas");
+			element = document.getElementById("qrcodeCanvas");
 			element.parentNode.removeChild(element);
 			element = document.getElementById("label-bitcoin");
 			element.parentNode.removeChild(element);
@@ -159,25 +126,16 @@ ready = function() {
 			element.parentNode.removeChild(element);
 			element = document.getElementById("pay-bitcoin");
 			element.parentNode.removeChild(element);
+			
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
 			
 			}
 			
 	    clearInterval(myVar);
-		// spinner.stop(target);
-		
+		// spinner.stop(target);	
 	}
 
 };
 
 	$(document).ready(ready);
-	
-
-
-	
-
-	
-
-
-	

@@ -43,7 +43,7 @@
 <% else %>
   <div class="authform">
     <%= form_for(@user, :url => registration_path(@user), :html => { :role => 'form'}) do |f| %>
-      <h3>Pay with Bitcoin or Card</h3>
+      <h3 id="bitcoin-or">Pay with Bitcoin or Card</h3>
       <%= devise_error_messages! %>
       <div class="form-group">
         <%= f.label :email %>

@@ -5,7 +5,7 @@
 	<% @products.each_slice(4) do |products_for_row| %>
 		<div class="col-md-12" >
 		<% products_for_row.each do |product| %>
-			<div class="col-md-3" >
+			<div class="col-md-3" style="height: 500px;" >
 
 			<%= render product %>
 
@@ -14,4 +14,5 @@
 		</div></br></br>
 	<% end %>
 	</div>
+	
 </div>
