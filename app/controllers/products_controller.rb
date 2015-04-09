@@ -8,7 +8,8 @@ class ProductsController < ApplicationController
      @path = @product.document.url
       if !@path.nil?
         data = open(@path) 
-        send_data data.read, filename: "monfichier.pdf", type: "application/pdf", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+        send_data data.read, filename: "monfichier.epub", type: "application/epub+zip", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+        # send_data data.read, filename: "monfichier.pdf", type: "application/pdf", disposition: 'attachment', stream: 'true', buffer_size: '4096'
         # redirect_to(@path)
   else 
          redirect_to list_products_path

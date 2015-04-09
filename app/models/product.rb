@@ -33,10 +33,11 @@ class Product < ActiveRecord::Base
    
 
    # validates_attachment_presence :document
-   validates_attachment_content_type :document, :content_type => [ 'application/pdf','text/plain',"application/octet-stream"]
+   validates_attachment_content_type :document, :content_type => [ 'application/pdf','text/plain',"application/epub+zip"]
    validates_attachment_file_name :document, :matches => [/png\Z/, /jpe?g\Z/,/epub\Z/,/pdf\Z/]
    validates_attachment :document,
       :size => { :in => 0..1499.kilobytes }
+   do_not_validate_attachment_file_type :document
 
    has_attached_file :audio
    # validates_attachment_presence :audio

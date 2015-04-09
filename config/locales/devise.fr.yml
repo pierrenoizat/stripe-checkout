@@ -35,7 +35,7 @@ fr:
       updated_not_active: 'Votre mot de passe a été changé avec succès.'
     registrations:
       destroyed: 'Votre compte a été supprimé avec succès. Nous espérons vous revoir bientôt.'
-      signed_up: 'Bienvenue, vous êtes connecté.'
+      signed_up: 'Paiement par carte bien reçu: bienvenue, vous êtes connecté.'
       signed_up_but_inactive: "Vous êtes bien enregistré. Vous ne pouvez cependant pas vous connecter car votre compte n'est pas encore activé."
       signed_up_but_locked: "Vous êtes bien enregistré. Vous ne pouvez cependant pas vous connecter car votre compte est verrouillé."
       signed_up_but_unconfirmed: 'Un message contenant un lien de confirmation a été envoyé à votre adresse email. Ouvrez ce lien pour confirmer votre compte.'
