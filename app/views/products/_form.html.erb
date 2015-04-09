@@ -25,8 +25,13 @@
     <%= f.text_field :price %>
   </div>
 <div class="field">
-    <%= f.label 'Category:' %>
+    <%= f.label '1st Category:' %>
 	<%= f.select :first_category, Product::CATEGORIES, :selected => "#{@product.first_category}" %>
+  </div>
+
+<div class="field">
+    <%= f.label '2nd Category:' %>
+	<%= f.select :second_category, Product::DOC_TYPES, :selected => "#{@product.second_category}" %>
   </div>
 
 <div class="field">

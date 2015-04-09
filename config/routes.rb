@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       member do
         get 'purchase'
         post 'document_download'
+        get 'info'
         end
       collection do
         get 'list'

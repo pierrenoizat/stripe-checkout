@@ -1,7 +1,34 @@
+<!-- product image + link to trigger modal display -->
+<a href="#" data-toggle="modal" data-target="#exampleModal" data-producttitle="<%= product.title %>" data-productprice="<%= product.price %>" data-productdescription="<%= product.description %>">
+	<%= image_tag product.avatar.url(:original) %>
+</a>
 
-</br></br>
-<!--<span><%= image_tag 'logo_bitcoin_france.png', size: '120x120', style: "align:center;" %></span></br>-->
-<span><%= image_tag product.avatar.url(:original) %></span></br></br>
+	<!-- Modal -->
+	
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title" id="exampleModalLabel"><%= product.title %></h4>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="form-group">
+	            <label for="recipient-name" class="control-label">Price:</label>
+	            <input type="text" class="form-control" id="recipient-name">
+	          </div>
+	          <div class="form-group">
+	            <label for="message-text" class="control-label">Description:</label>
+	            <textarea class="form-control" id="message-text"></textarea>
+	          </div>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+
+<!-- product info -->
 <article style="text-align:center;display: block;margin-left:auto;margin-right:auto;margin-bottom:0;margin-top:auto;">
 <%= product.title %></br></br>
 <%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
@@ -16,3 +43,4 @@
 		<%= link_to button_label ,purchase_product_path(product), :class => 'btn btn-primary btn-small' %>
 	<% end %>
 </article>
+</br></br>

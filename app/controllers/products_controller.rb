@@ -1,6 +1,11 @@
 class ProductsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:index, :list, :purchase, :store, :show]
+  before_filter :authenticate_user!, :except => [:index, :list, :purchase, :store, :show, :info]
   # before_filter :identify_product, :except => [:index, :list, :purchase, :new, :create,:document_download, :edit, :show]
+  
+  
+  def info
+    @product = Product.find(params[:id])
+  end
   
   def document_download
      @product = Product.find(params[:id])
@@ -8,12 +13,19 @@ class ProductsController < ApplicationController
      @path = @product.document.url
       if !@path.nil?
         data = open(@path) 
-        send_data data.read, filename: "monfichier.epub", type: "application/epub+zip", disposition: 'attachment', stream: 'true', buffer_size: '4096'
-        # send_data data.read, filename: "monfichier.pdf", type: "application/pdf", disposition: 'attachment', stream: 'true', buffer_size: '4096'
-        # redirect_to(@path)
-  else 
-         redirect_to list_products_path
-  end
+        
+        case @product.second_category
+        when "epub"
+          send_data data.read, filename: "monfichier.epub", type: "application/epub+zip", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+        when "pdf"
+          send_data data.read, filename: "monfichier.pdf", type: "application/pdf", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+        else
+          redirect_to store_products_path
+        end
+        
+      else 
+         redirect_to store_products_path
+      end
   end
 
   def video_download
@@ -22,7 +34,7 @@ class ProductsController < ApplicationController
       if !file_path.nil?
   send_file "#{Rails.root}/public/system/photos/#{@product.id}/original/#{file_path}", :x_sendfile => true 
   else 
-         redirect_to list_products_path
+         redirect_to store_products_path
   end
   end
 
@@ -32,7 +44,7 @@ class ProductsController < ApplicationController
       if !file_path.nil?
   send_file "#{Rails.root}/public/system/audios/#{@product.id}/original/#{file_path}", :x_sendfile => true 
   else 
-         redirect_to list_products_path
+         redirect_to store_products_path
   end
   end
   
@@ -102,7 +114,7 @@ class ProductsController < ApplicationController
   private
   
   def product_params
-      params.require(:product).permit(:avatar,:document,:audio,:video, :title, :description,:price, :first_category, :digital, :stock)
+      params.require(:product).permit(:avatar,:document,:audio,:video, :title, :description,:price, :first_category,:second_category, :digital, :stock)
     end
   
   

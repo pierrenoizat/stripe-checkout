@@ -60,6 +60,8 @@ class Product < ActiveRecord::Base
   
   CATEGORIES = ["ebook","paperback","membership"]
   
+  DOC_TYPES = ["pdf", "epub", "video", "audio"]
+  
   def set_default_stock
     self.stock ||= 1
   end
