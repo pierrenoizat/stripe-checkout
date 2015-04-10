@@ -1,5 +1,5 @@
 <!-- product image + link to trigger modal display -->
-<a href="#" data-toggle="modal" data-target="#exampleModal" data-producttitle="<%= product.title %>" data-productprice="<%= product.price %>" data-productdescription="<%= product.description %>">
+<a href="#" data-toggle="modal" data-target="#exampleModal" data-producttitle="<%= product.title %>" data-productprice="<%= product.price %>" data-productdescription="<%= product.description %>" data-productfirstcat="<%= product.first_category %>" data-productsecondcat="<%= product.second_category %>" data-productphotourl="<%= product.avatar.url(:square) %>" >
 	<%= image_tag product.avatar.url(:original) %>
 </a>
 
@@ -13,7 +13,9 @@
 	        <h4 class="modal-title" id="exampleModalLabel"><%= product.title %></h4>
 	      </div>
 	      <div class="modal-body">
+
 	        <form>
+			  <img id="product-photo" src="" />
 	          <div class="form-group">
 	            <label for="recipient-name" class="control-label">Price:</label>
 	            <input type="text" class="form-control" id="recipient-name">
@@ -21,6 +23,10 @@
 	          <div class="form-group">
 	            <label for="message-text" class="control-label">Description:</label>
 	            <textarea class="form-control" id="message-text"></textarea>
+	          </div>
+			  <div class="form-group">
+	            <label for="category" class="control-label">Category:</label>
+	            <textarea class="form-control" id="category"></textarea>
 	          </div>
 	        </form>
 	      </div>

@@ -5,8 +5,10 @@
 	<%= @product.title %>
 </p>
 <%= number_to_currency(@product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
-<b>Category:</b>
+<b>1st Category:</b>
 <%= @product.first_category %></br>
+<b>2nd Category:</b>
+<%= @product.second_category %></br>
 <b>Stock:</b>
 <%= @product.stock %></br>
 <b>Description:</b>
