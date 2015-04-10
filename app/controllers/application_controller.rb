@@ -33,6 +33,7 @@ class ApplicationController < ActionController::Base
     
   end
   
+  
   def create_order(user)
     
     require 'bigdecimal'
@@ -40,7 +41,12 @@ class ApplicationController < ActionController::Base
     
     @product = Product.find_by_id(params[:user][:product_id])
     
-    if @product
+    password = params[:user][:password]
+    password_confirmation = params[:user][:password_confirmation]
+    
+    valid_password = (password.length.between?(6,128) and (password == password_confirmation)) # pwd length range must be identical to config/initializers/devise.rb setting
+    
+    if @product and valid_password
     @amount = @product.price.to_i/100.0 # price in EUR
     
     @order = Order.create(

@@ -20,7 +20,7 @@ class RegistrationsController < Devise::RegistrationsController
     @users = User.order("created_at ASC").all.select { |m| m.email == @user.email }
     
     if !@users.blank?
-      redirect_to new_user_session_path  # email is already taken
+      redirect_to new_user_session_path, :flash => { :info => "Email is already taken: please sign in or sign up with another email." }
     else
     #if verify_recaptcha :private_key => Rails.application.secrets.recaptcha_private_key, :model => @user, :message => "Oh! It's error with reCAPTCHA!"
       # create_order(@user)
@@ -36,7 +36,7 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
     else
-      redirect_to root_url, :flash => { :info => "An error prevented you from signing up. Please try again now." }
+      redirect_to root_url, :flash => { :info => "An error prevented you from signing up: no product selected." }
     end
   end
   
