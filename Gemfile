@@ -27,7 +27,7 @@ gem 'oauth2', '~> 1.0.0'
 
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'spinjs-rails' # rails 3.1 only ?
-
+gem 'jquery-turbolinks'
 # gem 'aws-sdk', '~> 1.5.7'
 
 group :development, :test do
