@@ -100,11 +100,16 @@ class RegistrationsController < Devise::RegistrationsController
     end
   
   def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up).push(:email, :stripeToken, :password)
+      devise_parameter_sanitizer.for(:sign_up).push(:email, :stripeToken, :password, :name, :street, :postal_code, :city, :country )
+      devise_parameter_sanitizer.for(:account_update).push(:name, :street, :postal_code, :city, :country )
   end
   
   def sign_up_params
       devise_parameter_sanitizer.sanitize(:sign_up)
     end
+    
+    def update_params
+        devise_parameter_sanitizer.sanitize(:account_update)
+      end
  
 end

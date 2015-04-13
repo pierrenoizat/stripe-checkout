@@ -1,2 +1,36 @@
-<h3>Order</h3>
-<p>Email: <%= @order.email if @order.email %></p>
+</br></br><h4>Order # <%= @order.id %></h4>
+<div class="container-fluid">
+	<div class="row" >
+		<div class="col-md-6" >
+<div class="table-responsive">
+<table class="table table-condensed table-bordered">
+<tr class="something"><td class="col-md-2">Account</td><td class="col-md-6"><b><%= @order.email %></b></td>
+<tr><td>Date</td><td><b><%= @order.created_at.strftime("%d/%m/%Y") %></b></td>
+
+<tr><td class="col-md-2">Amount</td><td class="col-md-4"><b><%= number_to_currency(@order.amount, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></b></td>
+
+<tr><td class="col-md-2">Content</td><td class="col-md-4"><b><%= @order.content %></b></td>
+
+<tr><td class="col-md-2">Payment type</td><td class="col-md-4"><b><%= @order.pay_type %></b></td>
+
+<tr><td class="col-md-2">Status</td><td class="col-md-4"><b><%= @order.status %></b></td>
+
+</table>
+</div>
+
+<div class="col-md-6" >
+	</div>
+
+</div>
+</div>
+</div>
+<% @user = User.find_by_email(@order.email)%>
+<% if @user.product_id %>
+<% @product= Product.find_by_id(@user.product_id) %>
+	<div><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></div></br>
+	<!--<%= link_to "Download to Browser", @product.avatar.url(:original, false),:class => 'btn btn-success btn-large' %>-->
+	<p><%= button_to t('.download_doc', :default => "Download document"),
+                document_download_product_path(@product), :action => :document_download, :class => "btn btn-success btn-small" %></p>
+<% else %>
+	<%= link_to 'Download PDF', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
+<% end %>

@@ -74,6 +74,7 @@ class ProductsController < ApplicationController
     # @products = Product.find_all_by_id(params[:id])
     # @products = Product.all.select { |m| m.id == @product.id }
     render "visitors/index"
+
   end
   
   def create

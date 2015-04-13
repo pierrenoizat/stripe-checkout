@@ -20,6 +20,17 @@
         <%= f.password_field :password_confirmation, class: 'form-control' %>
       </div>
     </fieldset>
+
+	<fieldset>
+      <div class="form-inline">
+        <%= f.text_field :name, class: 'form-control', :style => "width:290px;" %>
+        <%= f.text_field :street, class: 'form-control', :style => "width:290px;" %></br>
+		<%= f.text_field :postal_code, class: 'form-control', :style => "width:95px;" %>
+        <%= f.text_field :city, class: 'form-control', :style => "width:190px;" %>
+        <%= f.select :country, User::COUNTRIES, :selected => "#{current_user.country}" %>
+      </div>
+    </fieldset>
+
     <fieldset>
       <p>You must enter your current password to make changes.</p>
       <div class="form-group">
@@ -28,6 +39,7 @@
       </div>
     </fieldset>
     <%= f.submit 'Update', :class => 'button right' %>
+	<%= link_to 'Cancel', root_path, class: 'btn btn-small', style: "background-color:gainsboro;color:black;" %>
   <% end %>
 </div>
 <div class="authform">

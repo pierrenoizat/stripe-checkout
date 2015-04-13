@@ -15,7 +15,7 @@
 		<p><%= button_to t('.download_pdf', :default => "Download PDF"),
 	                document_download_product_path(@product), :action => :document_download, :class => "btn btn-success btn-small" %></p>
 	<% else %>
-    	<%= link_to 'Download PDF', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
+    	<%= link_to 'Download', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
 	<% end %>
   <% end %>
 <% else %>

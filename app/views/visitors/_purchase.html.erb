@@ -5,7 +5,7 @@
       <div class="authform">
 	    <%= form_for(User.new, :url => {:controller=>'registrations', :action => 'pay'}, :html => { :role => 'form'}) do |f| %>
 	      <h3>Sign Up &amp; Purchase</h3>
-
+			<% unless product.digital %>
 			<div class="form-group">
 		        <%= f.text_field :name, class: 'form-control', :placeholder => "John Doe" %>
 		      </div>
@@ -24,6 +24,7 @@
 				<%	end %>
 				<%= f.select :country, User::COUNTRIES, :selected => "#{default}" %>
 		      </div>
+			<% end %>
 
 
 		      <div class="form-group">

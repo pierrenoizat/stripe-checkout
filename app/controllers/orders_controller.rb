@@ -2,12 +2,18 @@ class OrdersController < ApplicationController
   # protect_from_forgery :except => :callback
   skip_before_filter :verify_authenticity_token, :except => [:update, :create]
   
+    def index
+      # @orders = Order.all
+      @orders = Order.order("created_at ASC").all.select { |m| User.find_by_email(m.email) }
+    end
+  
     def show
       @order = Order.find(params[:id])
-      @user = User.find_by_id(@order.user_id)
+      @user = User.find_by_email(@order.email)
       
       respond_to do |format|
               format.json
+              format.html
             end
 
     end
@@ -41,6 +47,12 @@ class OrdersController < ApplicationController
         flash.now[:success] = 'Payment received! You signed up successfully.'
       end
       render :nothing => true, :status => 200, :content_type => 'text/html'
+    end
+    
+    def destroy
+      order = Order.find(params[:id])
+      order.destroy
+      redirect_to orders_path, :notice => "Order deleted."
     end
 
   private

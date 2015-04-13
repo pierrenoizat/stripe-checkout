@@ -32,8 +32,8 @@ $('#exampleModal').on('show.bs.modal', function (event) {
   // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
   var modal = $(this);
   modal.find('.modal-title').text('Product: ' + title);
-  modal.find('.modal-body #recipient-name').val(price);
-  modal.find('.modal-body #message-text').val(description);
+  modal.find('.modal-body #product-price').val(price);
+  modal.find('.modal-body #product-description').val(description);
   modal.find('.modal-body #category').val(category);
   modal.find('.modal-body #product-photo').attr("src", productphotourl);
 })

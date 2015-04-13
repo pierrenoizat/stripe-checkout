@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   resources :users do
       member do
         get 'download'
+        get 'order_list'
         end
       end
   

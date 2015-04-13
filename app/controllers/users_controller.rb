@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, :except => [:download,:show]
-  before_filter :admin_only, :except => [:download,:show]
+  before_filter :admin_only, :except => [:download,:show, :order_list]
+  
+  def order_list
+    
+    @user = User.find(params[:id])
+    # @orders = Order.where(email: @user.email)
+    @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email }
+    
+  end
 
   def download
     @user = User.find(params[:id])
@@ -48,7 +56,7 @@ class UsersController < ApplicationController
   end
 
   def secure_params
-    params.require(:user).permit(:role,:email, :product_id, :bitcoin )
+    params.require(:user).permit(:role,:email, :product_id, :bitcoin, :name, :street, :postal_code, :city, :country )
   end
 
 end

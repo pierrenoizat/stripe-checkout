@@ -38,6 +38,16 @@ class User < ActiveRecord::Base
           "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan",
           "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom",
           "United States", "Uruguay", "Uzbekistan", "Venezuela", "Viet Nam", "Zambia", "Zimbabwe"]
+          
+          
+  def purchased_product?(id)
+    
+    @product = Product.find_by_id(id)
+
+    @orders = Order.all.select { |m| ((m.email == self.email and m.content == @product.title) and m.status == "paid") }
+    purchased = !@orders.blank?
+    
+  end
 
   def set_default_role
     self.role ||= :user

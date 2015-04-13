@@ -4,18 +4,12 @@
     <%= form_for(@user, :url => {:controller=>'registrations', :action => 'pay'}, :html => { :role => 'form'}) do |f| %>
       <h3>Sign Up &amp; Purchase</h3>
       <%= devise_error_messages! %>
-
-		<div class="form-group">
-	        <%= f.text_field :name, class: 'form-control', :placeholder => "John Doe" %>
-	      </div>
-	      <div class="form-group">
-	        <%= f.text_field :street, class: 'form-control', :placeholder => "Street Address" %>
-	      </div>
+	
 		<div class="form-inline">
-	        <%= f.text_field :postal_code, class: 'form-control', :style => "width:95px;", :placeholder => "Post Code" %>
-	        <%= f.text_field :city, class: 'form-control', :style => "width:230px;", :placeholder => "City" %>
-	      </div></br>
-		<div class="form-group">
+	        <%= f.text_field :name, class: 'form-control', :style => "width:290px;", :placeholder => "John Doe" %>
+	        <%= f.text_field :street, class: 'form-control', :style => "width:290px;", :placeholder => "Street Address" %>
+			<%= f.text_field :postal_code, class: 'form-control', :style => "width:95px;", :placeholder => "Post Code"  %>
+	        <%= f.text_field :city, class: 'form-control', :style => "width:190px;", :placeholder => "City"  %>
 	        <% default = case I18n.locale.to_s  %>
 			<%	when 'en' then 'United States' %>
 			<%	when 'fr' then 'France' %>

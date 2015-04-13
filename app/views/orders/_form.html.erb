@@ -1,0 +1,66 @@
+<%- model_class = Order -%>
+<%= form_for(@order, multipart: true) do |f| %>
+<% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label 'Name:' %>
+    <%= f.text_field :name %>
+  </div>
+<div class="field">
+    <%= f.label 'Content:' %>
+    <%= f.text_field :content, :style => "width: 450px;height: 100px;", :default => @order.content %>
+  </div>
+<div class="field">
+    <%= f.label 'Amount:' %>
+    <%= f.text_field :amount %>
+  </div>
+<div class="field">
+    <%= f.label 'Street:' %>
+	<%= f.select :street %>
+  </div>
+<div class="field">
+    <%= f.label 'Postal code:' %>
+	<%= f.select :postal_code %>
+  </div>
+<div class="field">
+    <%= f.label 'City:' %>
+	<%= f.select :city %>
+  </div>
+
+<div class="field">
+    <%= f.label 'Country:' %>
+	<%= f.select :country, Product::COUNTRIES, :selected => "#{@order.country}" %>
+  </div>
+
+<div class="field">
+    <%= f.label 'Pay type:' %>
+	<%= f.text_field :pay_type, :default => @order.pay_type %>
+  </div>
+
+<div class="field">
+    <%= f.label 'BTC Address:' %>
+    <%= f.file_field :address %>
+  </div>
+
+
+	
+<div class="actions">
+	<% if @order.id %>
+		<%= f.submit 'Update', class: "btn btn-primary btn-small", style: "background-color:blue;color:white;" %>
+	<% else %>
+		<%= f.submit 'Create', class: "btn btn-primary btn-small", style: "background-color:blue;color:white;" %>
+	<% end %>
+	
+	<%= link_to 'Cancel', orders_path, class: 'btn btn-small', style: "background-color:gainsboro;color:black;" %>
+	  </div>
+	<% end %>

@@ -1,0 +1,13 @@
+<tr>
+<td><%= order.id %></td>
+<td><%= order.name %></td>
+<td><%= order.email %></td>
+<td><%= order.pay_type %></td>
+<td><%= number_to_currency(order.amount, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></td>
+<td><%= order.content %></td>
+<td><%= order.address %></td>
+<td><%= order.status %></td>
+<td><%= link_to "Show", order_path(order), :class => 'btn btn-default btn-xs' %></td>
+<td><%= link_to "Edit", edit_order_path(order), :class => 'btn btn-default btn-xs btn-success' %></td>
+<td><%= link_to "Delete", order_path(order), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-default btn-xs btn-danger' %></td>
+</tr>

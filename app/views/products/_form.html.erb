@@ -40,6 +40,11 @@
   </div>
 
 <div class="field">
+    <%= f.label 'Dgital:' %>
+	<%= f.check_box :digital, :default => @product.digital %>
+  </div>
+
+<div class="field">
     <%= f.label 'Photo*:' %>
     <%= f.file_field :avatar %>
   </div>

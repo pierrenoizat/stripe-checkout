@@ -1,0 +1,18 @@
+</br></br></br>
+<h4><%= pluralize( @orders.count, 'order' ) %></h4>
+<table class="table table-condensed table-hover">
+	<th>
+		<td><%= t('.name') %></td>
+		<td><%= t('.email') %></td>
+		<td><%= t('.pay_type') %></td>
+		<td><%= t('.amount') %></td>
+		<td><%= t('.content') %></td>
+		<td><%= t('.btc_address') %></td>
+		<td><%= t('.status') %></td>
+		<td> </td>
+	</th>
+	<% @orders.each do |order| %>
+			<%= render order %>
+		<% end %>
+</table>
+<%= link_to 'Back', root_path, class: 'btn btn-small', style: "background-color:gainsboro;color:black;" %>
