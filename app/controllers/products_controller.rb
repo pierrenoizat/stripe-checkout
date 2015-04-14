@@ -69,13 +69,68 @@ class ProductsController < ApplicationController
     # send_file @path, :disposition => "attachment; filename=#{@file}"
   end
   
-  def purchase 
-    @products = Product.where(id: params[:id]).to_a
-    # @products = Product.find_all_by_id(params[:id])
-    # @products = Product.all.select { |m| m.id == @product.id }
-    render "visitors/index"
-
+  
+  def purchase
+      @products = Product.where(id: params[:id]).to_a
+      render "visitors/index"
   end
+  
+  def pay
+      # @products = Product.where(id: params[:id]).to_a
+      @product = Product.find_by_id(params[:id])
+      respond_to do |format|
+          # that will mean to send a javascript code to client-side;
+          format.js { render :action => "pay" }
+          format.html { render :action => "pay" }
+        end
+  end
+  
+  def checkout
+      # @products = Product.where(id: params[:id]).to_a
+      @product = Product.find_by_id(params[:id])
+      @user = current_user  # checkout method is called only when user is signed in
+      @user.product_id = @product.id
+      @user.save
+      
+      @orders = Order.all.select { |m| m.user_id == current_user.id and m.content == @product.title }
+      
+      # product = @product
+      @amount = @product.price.to_i/100.0 # price in EUR
+      
+      if @orders.blank?
+      @order = Order.create(
+        :email => current_user.email,
+        :name => current_user.name,
+        :street => current_user.street,
+        :postal_code => current_user.postal_code,
+        :city => current_user.city,
+        :country => current_user.country,
+        :amount => "#{@amount}",
+        :content => "#{@product.title}",
+        :currency    => 'EUR',
+        :status    => 'pending',
+        :pay_type => 'card',
+        :user_id => current_user.id
+        )
+      else
+        @order = @orders.last
+        @order.update(
+          :email => current_user.email,
+          :name => current_user.name,
+          :street => current_user.street,
+          :postal_code => current_user.postal_code,
+          :city => current_user.city,
+          :country => current_user.country,
+          :amount => "#{@amount}",
+          :currency    => 'EUR',
+          :status    => 'pending',
+          :pay_type => 'card'
+          )
+      end
+
+      
+  end
+  
   
   def create
       @product = Product.new(product_params)
@@ -85,7 +140,7 @@ class ProductsController < ApplicationController
        else
          render action: 'new'
       end
-    end
+  end
     
   def edit
     @product = Product.find_by_id(params[:id])

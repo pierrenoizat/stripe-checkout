@@ -1,2 +1,28 @@
-<h3>User</h3>
-<p>Email: <%= @user.email if @user.email %></p>
+</br></br><h4>User # <%= @user.id %></h4>
+<div class="container-fluid">
+	<div class="row" >
+		<div class="col-md-6" >
+<div class="table-responsive">
+<table class="table table-condensed table-bordered">
+<tr class="something"><td class="col-md-2">Account email</td><td class="col-md-6"><b><%= @user.email %></b></td>
+<tr><td>Since</td><td><b><%= @user.created_at.strftime("%d/%m/%Y") %></b></td>
+
+<tr><td class="col-md-2">Name</td><td class="col-md-4"><b><%= @user.name %></b></td>
+
+<tr><td class="col-md-2">Street</td><td class="col-md-4"><b><%= @user.street %></b></td>
+
+<tr><td class="col-md-2">City</td><td class="col-md-4"><b><%= @user.city %></b></td>
+<tr><td class="col-md-2">Postal code</td><td class="col-md-4"><b><%= @user.postal_code %></b></td>
+<tr><td class="col-md-2">Country</td><td class="col-md-4"><b><%= @user.country %></b></td>
+<tr><td class="col-md-2">Signed up with product id</td><td class="col-md-4"><b><%= @user.product_id %></b></td>
+<tr><td class="col-md-2">Role</td><td class="col-md-4"><b><%= @user.role %></b></td>
+
+</table>
+</div>
+
+<div class="col-md-6" >
+	</div>
+
+</div>
+</div>
+</div>

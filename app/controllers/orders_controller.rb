@@ -6,10 +6,43 @@ class OrdersController < ApplicationController
       # @orders = Order.all
       @orders = Order.order("created_at ASC").all.select { |m| User.find_by_email(m.email) }
     end
+    
+    def create
+      
+        if user_signed_in?
+          @product = Product.find_by_id(current_user.product_id)
+        end
+        
+        if params[:stripeEmail]
+          @order = Order.new(
+            :email => params[:stripeEmail],
+            :name => current_user.name,
+            :street => current_user.street,
+            :postal_code => current_user.postal_code,
+            :city => current_user.city,
+            :country => current_user.country,
+            :currency    => 'EUR',
+            :content => @product.title,
+            :status    => 'paid',
+            :pay_type => 'card'
+            )
+        end
+        
+        if @order.save
+          redirect_to @order, notice: 'Order was successfully created.'
+         else
+           render action: 'new'
+        end
+    end
   
     def show
       @order = Order.find(params[:id])
-      @user = User.find_by_email(@order.email)
+      
+      if user_signed_in?
+        @user = current_user
+      else
+        @user = User.find_by_email(@order.email)
+      end
       
       respond_to do |format|
               format.json
@@ -49,6 +82,25 @@ class OrdersController < ApplicationController
       render :nothing => true, :status => 200, :content_type => 'text/html'
     end
     
+    
+    def update
+      @order = Order.find_by_id(params[:id])
+      if params[:stripeEmail]
+        @order.status = 'paid'
+      end
+      
+      respond_to do |format|
+        
+        if @order.update(status: "paid")
+          format.html { redirect_to(@order, :notice => 'Order was successfully updated.') }
+          format.xml  { head :ok }
+        else
+          format.html { render :action => "edit" }
+          format.xml  { render :xml => @order.errors, :status => :unprocessable_entity }
+        end
+      end
+    end
+    
     def destroy
       order = Order.find(params[:id])
       order.destroy
@@ -57,7 +109,7 @@ class OrdersController < ApplicationController
 
   private
     def secure_params
-      params.require(:order).permit(:name, :address, :email, :amount, :status, :balance, :pay_type, :user_id)
+      params.require(:order).permit(:name, :address, :email, :content, :amount, :status, :balance, :pay_type, :user_id, :stripeToken, :stripeEmail, :stripeTokenType)
     end
   
   

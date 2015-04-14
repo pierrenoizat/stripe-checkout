@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
   
   before_create :pay_with_card, unless: Proc.new { |user| user.admin? or user.bitcoin }
-  
+  after_create :update_order_user_id
   # after_create :sign_up_for_mailing_list
 
   has_many :orders
@@ -58,15 +58,38 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+         
+  def update_order_user_id
+    @orders = Order.order("created_at ASC").all.select { |m| m.email == self.email }
+    @order = @orders.last
+    @order.user_id= self.id
+    @order.save
+    
+    self.name = @order.name
+    self.street = @order.street
+    self.city = @order.city
+    self.postal_code = @order.postal_code
+    self.country = @order.country
+    self.save
+    
+    
+  end
 
   def pay_with_bitcoin
     
     @orders = Order.order("created_at ASC").all.select { |m| m.email == self.email }
-
-    @order = @orders.last
-    @products = Product.all.select { |m| m.title == @order.content }
-    @product = @products.last
-    self.product_id = @product.id
+    unless @orders.blank?
+      @order = @orders.last
+    end
+    unless @order.blank?
+     @products = Product.all.select { |m| m.title == @order.content }
+    end
+    unless @products.blank?
+      @product = @products.last
+    end
+    unless @product.blank?
+      self.product_id = @product.id
+    end  
     
   end
 
@@ -86,7 +109,7 @@ class User < ActiveRecord::Base
       :email => self.email,
       :card  => self.stripeToken
     )
-    
+
     price = ((@order.amount*100).to_i > $MIN_STRIPE_AMOUNT ? (@order.amount*100).to_i : $MIN_STRIPE_AMOUNT) # warning: Stripe requires amount to be at least 50 cents
    
     charge = Stripe::Charge.create(

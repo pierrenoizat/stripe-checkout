@@ -4,7 +4,7 @@
     <p><%= link_to 'User count:', users_path %> <%= User.count %></p>
   <% else %>
 	<h3>Welcome</h3>
-    <h4>You signed up with <%= Product.find_by_id(current_user.product_id).title if current_user.product_id %></h4>
+    <h4>You purchased : <%= Product.find_by_id(current_user.product_id).title if current_user.product_id %></h4>
 	<p>Email: <%= current_user.email if current_user.email %></p>
 	<p></p></br>
 	
@@ -12,8 +12,9 @@
 	<% @product= Product.find_by_id(current_user.product_id) %>
 		<div><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></div></br>
 		<!--<%= link_to "Download to Browser", @product.avatar.url(:original, false),:class => 'btn btn-success btn-large' %>-->
+		<% unless @product.document_file_name.blank? %>
 		<p><%= button_to t('.download_pdf', :default => "Download PDF"),
-	                document_download_product_path(@product), :action => :document_download, :class => "btn btn-success btn-small" %></p>
+	                document_download_product_path(@product), :action => :document_download, :class => "btn btn-success btn-small" %></p><% end %>
 	<% else %>
     	<%= link_to 'Download', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
 	<% end %>
@@ -21,7 +22,7 @@
 <% else %>
 	<% if @products.count == 1 %>
 	
-	<h3>Purchase your membership</h3>
+	<h3>Checkout</h3>
 
 	<div class="container-fluid">
 		<div class="row" >

@@ -1,0 +1,40 @@
+<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#purchaseModal">Purchase</a>
+<div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseModal" aria-hidden="true">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="authform">
+	    <%= form_for(Order.new, :url => {:controller=>'orders', :action => 'pay'}, :html => { :role => 'form'}) do |f| %>
+	      <h3>Purchase</h3>
+			<% unless product.digital %>
+			<div class="form-group">
+		        <%= f.text_field :name, class: 'form-control', :placeholder => "#{current_user.name}" %>
+		      </div>
+		      <div class="form-group">
+		        <%= f.text_field :street, class: 'form-control', :placeholder => "#{current_user.street}" %>
+		      </div>
+			<div class="form-inline">
+		        <%= f.text_field :postal_code, class: 'form-control', :style => "width:95px;", :placeholder => "#{current_user.postal_code}" %>
+		        <%= f.text_field :city, class: 'form-control', :style => "width:230px;", :placeholder => "#{current_user.city}" %>
+		      </div></br>
+			<div class="form-group">
+				<%= f.select :country, User::COUNTRIES, :selected => "#{current_user.country}" %>
+		      </div>
+			<% end %>
+
+
+		      <div class="form-group">
+	        <%= f.email_field :email, :autofocus => true, class: 'form-control', :placeholder => "#{current_user.email}", disabled: 'true' %>
+	      </div>
+
+	      <div class="form-group">
+			<%= f.hidden_field :product_id, :value => product.id %>
+	      </div>
+		  <!--<%= recaptcha_tags :public_key => Rails.application.secrets.recaptcha_public_key %>-->
+	      <%= link_to 'Cancel', product_path(@product), :class => 'button left' %>
+	      <%= f.submit 'Continue', :class => 'button' %>
+	    <% end %>
+	  </div>
+      </div>
+    </div>
+  </div>
+</div>

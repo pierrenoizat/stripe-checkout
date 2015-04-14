@@ -17,6 +17,12 @@ class RegistrationsController < Devise::RegistrationsController
     @user.password_confirmation = params[:user][:password_confirmation]
     @user.product_id = params[:user][:product_id]
     
+    @user.name = params[:user][:name]
+    @user.street = params[:user][:street]
+    @user.city = params[:user][:city ]
+    @user.postal_code = params[:user][:postal_code]
+    @user.country = params[:user][:country]
+    
     @users = User.order("created_at ASC").all.select { |m| m.email == @user.email }
     
     if !@users.blank?
@@ -52,9 +58,17 @@ class RegistrationsController < Devise::RegistrationsController
         @user.bitcoin = params[:bitcoin]
         @user.save!
         # @user.save
+        @user = User.find_by_email(params[:email])
+        
         @orders = Order.all.select { |m| m.email == @user.email }
         @order = @orders.last
         @order.user_id = @user.id
+        @user.name = @order.name
+        @user.street = @order.street
+        @user.postal_code = @order.postal_code
+        @user.city = @order.city
+        @user.country = @order.country
+        @user.save!
         @order.save
       
         redirect_to after_sign_up_path_for(@user), notice: "Bitcoin payment received, thank you! You signed up successfully."
@@ -78,6 +92,12 @@ class RegistrationsController < Devise::RegistrationsController
       @products = Product.all.select { |m| m.title == @order.content }
       @product = @products.last
       @user.product_id = @product.id
+      
+      @user.name = @order.name
+      @user.street = @order.street
+      @user.postal_code = @order.postal_code
+      @user.city = @order.city
+      @user.country = @order.country
       # @order.user_id = @user.id
       # @order.save
       # sign_in(:user, @user)

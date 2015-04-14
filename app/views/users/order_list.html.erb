@@ -19,7 +19,14 @@
 			<td><%= order.content %></td>
 			<td><%= order.address %></td>
 			<td><%= order.status %></td>
-			<td><%= link_to "Show", order_path(order), :class => 'btn btn-default btn-xs' %></td>
+			<% if order.status == 'pending' %>
+				<% product = Product.find_by_title(order.content) %>
+				<td><%= link_to 'Show', checkout_product_path(product), :method => 'post', :class => 'btn btn-primary btn-xs btn-success' %></td>
+			<% else %>
+				<td><%= link_to "Show", order_path(order), :class => 'btn btn-default btn-xs' %></td>
+			<% end %>
+			
+			
 			</tr>
 		<% end %>
 </table>

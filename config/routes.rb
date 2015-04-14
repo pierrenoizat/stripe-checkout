@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   resources :products do
       member do
         get 'purchase'
+        get 'pay'
+        post 'checkout'
         post 'document_download'
         get 'info'
         end
@@ -30,6 +32,9 @@ Rails.application.routes.draw do
         end
       end
       
+  resources :users do
+        resources :orders
+      end
       
   resources :users do
       member do

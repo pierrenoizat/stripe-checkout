@@ -51,6 +51,11 @@ class ApplicationController < ActionController::Base
     
     @order = Order.create(
       :email => user.email,
+      :name => user.name,
+      :street => user.street,
+      :postal_code => user.postal_code,
+      :city => user.city,
+      :country => user.country,
       :amount => "#{@amount}",
       :content => "#{@product.title}",
       :currency    => 'EUR',
@@ -117,9 +122,9 @@ class ApplicationController < ActionController::Base
   end
   
   def configure_permitted_parameters
-      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :remember_me, :product_id, :bitcoin) }
+      devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:email, :password, :password_confirmation, :remember_me, :product_id, :bitcoin, :name, :street, :postal_code, :city, :country) }
       devise_parameter_sanitizer.for(:sign_in) { |u| u.permit( :email, :password, :remember_me) }
-      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password) }
+      devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password,:name, :street, :postal_code, :city, :country ) }
     end
   
 end
