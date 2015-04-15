@@ -53,7 +53,8 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
   $MAIN_URL = "http://localhost:3000/"
-  $ORDERS_URL = "http://localhost:3000/orders/"
+
+  $ORDERS_URL = "http://localhost:3000/orders/" #   encoded_url = URI.encode(url) then URI.parse(encoded_url)
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
