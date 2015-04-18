@@ -116,9 +116,11 @@ function myStopFunction() {
 		var url = '<%= $MAIN_URL %>' + "users"
 		var bitcoin = true;
 		if (signedin == true) {
-			var element = document.getElementById("entete");
-			element.innerHTML = "Payment received!";
+			var element = document.getElementById("sous-titre");
+			element.innerHTML = "Payment received, thank you: order complete";
 
+			element = document.getElementById("titre");
+			element.innerHTML = "Order # " + orderId.toString();
 			element = document.getElementById("qrcodeCanvas");
 			element.parentNode.removeChild(element);
 			element = document.getElementById("label-bitcoin");
@@ -128,6 +130,8 @@ function myStopFunction() {
 			element = document.getElementById("paybycard");
 			element.parentNode.removeChild(element);
 			element = document.getElementById("pay-bitcoin");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("my-buttons");
 			element.parentNode.removeChild(element);
 
 			var elements = document.getElementsByClassName("progress");
