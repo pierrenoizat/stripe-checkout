@@ -1,0 +1,58 @@
+<% @product= Product.find_by_title(@order.content) %>
+</br></br><h4>Order # <%= @order.id %></h4>
+<div class="container-fluid">
+	<div class="row" >
+		<div class="col-md-6" >
+<div class="table-responsive">
+<table class="table table-condensed table-bordered">
+<tr class="something"><td class="col-md-2">Account</td><td class="col-md-6"><b><%= @order.email %></b></td>
+<tr><td>Date</td><td><b><%= @order.created_at.strftime("%d/%m/%Y") %></b></td>
+
+<tr><td class="col-md-2">Amount</td><td class="col-md-4"><b><%= number_to_currency(@order.amount, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></b></td>
+
+<tr><td class="col-md-2">Content</td><td class="col-md-4"><b><%= @order.content %></b></td>
+
+<tr><td class="col-md-2">Payment type</td><td class="col-md-4"><b><%= @order.pay_type %></b></td>
+
+<tr><td class="col-md-2">Status</td><td class="col-md-4"><b><%= @order.status %></b></td>
+	
+<tr><td class="col-md-2">Bitcoin Address</td><td class="col-md-4"><b><%= @order.address %></b></td>
+<% unless @product.digital or @order.city.blank? %>
+<tr><td class="col-md-2">Delivery Address</td><td class="col-md-4"><b><%= @order.name %> | <%= @order.street %> | <%= @order.postal_code %> | <%= @order.city %> | <%= @order.country %></b></td>
+<% end %>
+
+</table>
+</div>
+
+<div class="col-md-6" >
+	</div>
+
+</div>
+</div>
+</div>
+
+	<div><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></div></br>
+	<!--<%= link_to "Download to Browser", @product.avatar.url(:original, false),:class => 'btn btn-success btn-large' %>-->
+	<% if !@product.document_file_name.blank? and @order.status == 'paid' %>
+	<p><%= button_to t('.download_doc', :default => "Download document"),
+                document_download_product_path(@product), :action => :document_download, :class => "btn btn-success btn-small" %></p>
+	<% end %>
+	<% if @order.status == 'pending' %>
+	<% price = ((@order.amount*100).to_i > $MIN_STRIPE_AMOUNT ? (@order.amount*100).to_i : $MIN_STRIPE_AMOUNT) %>
+	<div id="my-buttons">
+
+	       <script src="https://checkout.stripe.com/v2/checkout.js"
+	        class="stripe-button"
+	        data-label="Pay with card"
+	        data-key="<%= Rails.application.secrets.stripe_publishable_key %>"
+			data-image="<%= image_path('logo_bitcoin_france_transparent.png') %>"
+			data-email="<%= current_user.email %>"
+	        data-description="<%= @order.content %>"
+	        data-amount="<%= price %>"
+
+			data-currency="<%= @order.currency %>"
+			onclick="myFunction()"
+			>
+	       </script>
+	</div>
+	<% end %>

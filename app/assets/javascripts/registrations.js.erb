@@ -116,7 +116,7 @@ function myStopFunction() {
 		var url = '<%= $MAIN_URL %>' + "users"
 		var bitcoin = true;
 		if (signedin == true) {
-			url = "<%= $ORDERS_URL %>" + orderId;
+			url = "<%= $ORDERS_URL %>" + orderId + "/complete";
 			var showOrder = new XMLHttpRequest();
 			showOrder.open("GET", url, false);  // false means synchronous, wait for the response; true means asynchronous, don't wait
 			showOrder.send( null );

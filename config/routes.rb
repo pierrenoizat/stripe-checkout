@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   end
   
   resources :orders do
+    member do
+      get 'complete'
+      end
 	collection do
 		post :callback
-		get :callback
-		put :callback
 	end
 	end
 	

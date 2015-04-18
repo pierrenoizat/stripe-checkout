@@ -56,6 +56,18 @@ class OrdersController < ApplicationController
 
     end
     
+    
+    def complete
+      @order = Order.find(params[:id])
+      
+      if user_signed_in?
+        @user = current_user
+      else
+        @user = User.find_by_email(@order.email)
+      end
+
+    end
+    
     def callback # method called only if bitcoin payment is made
       
       @btc_address = params[:payment_address]
