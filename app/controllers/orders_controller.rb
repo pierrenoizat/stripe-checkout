@@ -1,6 +1,8 @@
 class OrdersController < ApplicationController
   # protect_from_forgery :except => :callback
-  skip_before_filter :verify_authenticity_token, :except => [:update, :create]
+  skip_before_filter :verify_authenticity_token, :except => [:update, :create, :index]
+  # before_filter :authenticate_user!, :except => [:index, :list, :purchase, :store, :show, :info]
+  # before_filter :admin_only, :except => [:download,:show, :order_list]
   
     def index
       # @orders = Order.all
@@ -99,5 +101,10 @@ class OrdersController < ApplicationController
       params.require(:order).permit(:name, :address, :email, :content, :amount, :status, :balance, :pay_type, :user_id, :stripeToken, :stripeEmail, :stripeTokenType)
     end
   
+    def admin_only
+      unless current_user.admin?
+        redirect_to :back, :alert => "Access denied."
+      end
+    end
   
 end
