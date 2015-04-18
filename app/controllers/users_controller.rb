@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, :except => [:download,:show]
   before_filter :admin_only, :except => [:download,:show, :order_list]
   
-  def order_list
+  def order_list  # TO DO delete expired bitcoin addresses
     
     @user = User.find(params[:id])
     # @orders = Order.where(email: @user.email)

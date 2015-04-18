@@ -112,6 +112,29 @@ class ProductsController < ApplicationController
         :pay_type => 'card',
         :user_id => current_user.id
         )
+        
+        if @order.save
+          # using paymium_api gem:
+          @client = Paymium::Api::Client.new  host: 'https://paymium.com/api/v1',
+                                              key: Rails.application.secrets.paymium_api_key,
+                                              secret: Rails.application.secrets.paymium_secret_key
+
+          payment_request = @client.post '/merchant/create_payment',  amount:"#{@order.amount}" , 
+                                                                      payment_split:"0", 
+                                                                      currency:"EUR",
+                                                                      callback_url: "#{$ORDERS_URL}callback"
+
+          @order.address = payment_request["payment_address"]
+          @btc_amount = payment_request["btc_amount"]
+          @expiry = payment_request["expires_at"]
+
+          @order.balance = @btc_amount.to_d
+    		  @order.qrcode_string = "bitcoin:#{@order.address}?amount=#{@btc_amount}" # warning: make sure the number of decimals here matches that of the Paymium API
+    		  @order.expiry = Time.at(@expiry.to_i).to_datetime
+          @order.save
+
+          end
+        
       else
         @order = @orders.last
         @order.update(

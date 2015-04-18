@@ -12,7 +12,7 @@
 	<% @product= Product.find_by_id(current_user.product_id) %>
 		<div><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></div></br>
 		<!--<%= link_to "Download to Browser", @product.avatar.url(:original, false),:class => 'btn btn-success btn-large' %>-->
-		<% unless @product.document_file_name.blank? %>
+		<% if !@product.document_file_name.blank? and current_user.purchased_product?(@product.id) %>
 		<p><%= button_to t('.download_pdf', :default => "Download PDF"),
 	                document_download_product_path(@product), :action => :document_download, :class => "btn btn-success btn-small" %></p><% end %>
 	<% else %>
