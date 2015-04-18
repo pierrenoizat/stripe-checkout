@@ -117,10 +117,16 @@ function myStopFunction() {
 		var bitcoin = true;
 		if (signedin == true) {
 			url = "<%= $ORDERS_URL %>" + orderId + "/complete";
-			var showOrder = new XMLHttpRequest();
-			showOrder.open("GET", url, false);  // false means synchronous, wait for the response; true means asynchronous, don't wait
-			showOrder.send( null );
-			return showOrder.responseText;
+			function httpGet(theUrl)
+			{
+			    var xmlHttp = null;
+
+			    xmlHttp = new XMLHttpRequest();
+			    xmlHttp.open( "GET", theUrl, false );
+			    xmlHttp.send( null );
+			    return xmlHttp.responseText;
+			}
+			httpGet(url);
 		}
 		else {
 		post(url, { "email":email, "password":pwd,"password_confirmation":pwd, "bitcoin":bitcoin });

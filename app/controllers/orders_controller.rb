@@ -65,8 +65,11 @@ class OrdersController < ApplicationController
       else
         @user = User.find_by_email(@order.email)
       end
+      
+      render js: "window.location.pathname = #{complete_order_path(@order).to_json}"
 
     end
+    
     
     def callback # method called only if bitcoin payment is made
       
