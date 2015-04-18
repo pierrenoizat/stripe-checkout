@@ -110,6 +110,7 @@ class ProductsController < ApplicationController
         :currency    => 'EUR',
         :status    => 'pending',
         :pay_type => 'card',
+        :signed_in => true,
         :user_id => current_user.id
         )
         
@@ -147,6 +148,7 @@ class ProductsController < ApplicationController
           :amount => "#{@amount}",
           :currency    => 'EUR',
           :status    => 'pending',
+          :signed_in => true,
           :pay_type => 'card'
           )
       end

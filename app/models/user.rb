@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   before_save :pay_with_bitcoin, unless: Proc.new { |user| user.admin? }  # executed before before_create callback
   
   before_create :pay_with_card, unless: Proc.new { |user| user.admin? or user.bitcoin }
-  after_create :update_order_user_id
+  after_create :update_order_user_id, unless: Proc.new { |user| user.admin? }
   # after_create :sign_up_for_mailing_list
 
   has_many :orders

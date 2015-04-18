@@ -41,7 +41,7 @@
 <!-- product info -->
 <article style="text-align:center;display: block;margin-left:auto;margin-right:auto;margin-bottom:0;margin-top:auto;">
 <%= product.title %></br></br>
-<%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
+
 	<% if current_user %>
 		<% if current_user.admin? %>
 			<%= link_to 'Edit',edit_product_path(product), :class => 'btn btn-primary btn-small' %>
@@ -51,9 +51,11 @@
 		<%= button_to t('.download_document', :default => "Download document"),
 	                document_download_product_path(product), :action => :document_download, :class => "btn btn-success btn-small" %>
 		<% else %>
+		<%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
 		<%= link_to 'Order', checkout_product_path(product), :method => 'post', :class => 'btn btn-primary btn-small' %>
 		<% end %>
 	<% else %>
+		<%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
 		<% button_label = product.first_category == "membership" ? 'Sign up' : 'Order' %>
 		<%= link_to button_label , purchase_product_path(product), :class => 'btn btn-primary btn-small' %>
 	<% end %>

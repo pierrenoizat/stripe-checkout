@@ -8,10 +8,12 @@ class OrdersController < ApplicationController
     end
     
     def create
-      
-        if user_signed_in?
+        
+        signed_in = user_signed_in?
+        if signed_in
           @product = Product.find_by_id(current_user.product_id)
         end
+         
         
         if params[:stripeEmail]
           @order = Order.new(
@@ -24,6 +26,7 @@ class OrdersController < ApplicationController
             :currency    => 'EUR',
             :content => @product.title,
             :status    => 'paid',
+            :signed_in => signed_in,
             :pay_type => 'card'
             )
         end

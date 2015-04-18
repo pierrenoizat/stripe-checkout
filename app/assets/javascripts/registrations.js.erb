@@ -26,7 +26,7 @@ var increment = 2000;  // check database value every increment milliseconds
 var myVar = setInterval(function(){ myTimer() }, increment);
 var duration = 0;
 var durationLimit = 900; // up to 15 minutes to pay by default
-
+var signedin = false;
 var value = 0;
 var pc = "0%";
 var email = $('#timer').data('email');
@@ -67,11 +67,15 @@ function myTimer() {
 
 		xmlhttp.open("GET", url, false);  // false means synchronous, wait for the response; true means asynchronous, don't wait
 		xmlhttp.send();
-		if (response.status == "&quot;paid&quot;") {
+		if (response.state == "&quot;paid&quot;") {
 			paid = true;
+		}
+		if (response.signedin == "&quot;true&quot;") {
+			signedin = true;
 		}
 		console.log(temps);
 		console.log(value);
+		console.log(signedin);
 	
 	    duration = duration + (increment/1250) ; // tweaked to match the actual time, too slow with +1 ?
 
@@ -111,8 +115,14 @@ function myStopFunction() {
 		
 		var url = '<%= $MAIN_URL %>' + "users"
 		var bitcoin = true;
-		
+		if (signedin == true) {
+			url = "<%= $ORDERS_URL %>" + orderId;
+			post(url, { "email":email, "status":status });
+			
+		}
+		else {
 		post(url, { "email":email, "password":pwd,"password_confirmation":pwd, "bitcoin":bitcoin });
+		}
 		
 		}
 	else {  // Bitcoin invoice expired
