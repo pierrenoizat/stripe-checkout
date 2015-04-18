@@ -67,7 +67,8 @@ class OrdersController < ApplicationController
       end
       
       # render js: "window.location.pathname = #{complete_order_path(@order).to_json}"
-      render :js => "window.location = '/visitors/index'"
+      # render :js => "window.location = '/visitors/index'"
+      redirect_to order_list_user_path(@user)
 
     end
     
