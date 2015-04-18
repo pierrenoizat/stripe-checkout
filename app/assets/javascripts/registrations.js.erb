@@ -116,17 +116,22 @@ function myStopFunction() {
 		var url = '<%= $MAIN_URL %>' + "users"
 		var bitcoin = true;
 		if (signedin == true) {
-			url = "<%= $ORDERS_URL %>" + orderId + "/complete";
-			function httpGet(theUrl)
-			{
-			    var xmlHttp = null;
+			var element = document.getElementById("entete");
+			element.innerHTML = "Payment received!";
 
-			    xmlHttp = new XMLHttpRequest();
-			    xmlHttp.open( "GET", theUrl, false );
-			    xmlHttp.send( null );
-			    return xmlHttp.responseText;
-			}
-			httpGet(url);
+			element = document.getElementById("qrcodeCanvas");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("label-bitcoin");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("bitcoin-address");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("paybycard");
+			element.parentNode.removeChild(element);
+			element = document.getElementById("pay-bitcoin");
+			element.parentNode.removeChild(element);
+
+			var elements = document.getElementsByClassName("progress");
+			elements[0].parentNode.removeChild(elements[0]);
 		}
 		else {
 		post(url, { "email":email, "password":pwd,"password_confirmation":pwd, "bitcoin":bitcoin });
