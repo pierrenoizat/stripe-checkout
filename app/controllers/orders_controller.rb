@@ -66,7 +66,8 @@ class OrdersController < ApplicationController
         @user = User.find_by_email(@order.email)
       end
       
-      render js: "window.location.pathname = #{complete_order_path(@order).to_json}"
+      # render js: "window.location.pathname = #{complete_order_path(@order).to_json}"
+      render :js => "window.location = '/visitors/index'"
 
     end
     
