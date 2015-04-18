@@ -103,7 +103,7 @@ class OrdersController < ApplicationController
       respond_to do |format|
         
         if @order.update(status: "paid")
-          format.html { redirect_to(@order, :notice => 'Order was successfully updated.') }
+          format.html { redirect_to(@order, :notice => 'Card payment received, thank you: order was successfully completed.') }
           format.xml  { head :ok }
         else
           format.html { render :action => "edit" }
