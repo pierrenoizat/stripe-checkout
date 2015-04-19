@@ -49,6 +49,13 @@ class ApplicationController < ActionController::Base
     if @product and valid_password
     @amount = @product.price.to_i/100.0 # price in EUR
     
+    @orders = Order.all.select { |m| m.email == user.email and m.status == "pending" }
+    unless @orders.blank?
+    @orders.each do |order|
+      order.destroy
+      end 
+    end
+    
     @order = Order.create(
       :email => user.email,
       :name => user.name,
