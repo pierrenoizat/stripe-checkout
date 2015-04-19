@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     
     @user = User.find(params[:id])
     # @orders = Order.where(email: @user.email)
-    @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email }
+    @orders = Order.order("created_at ASC").all.select { |m| m.email == @user.email and m.status == "paid" }
     
   end
 

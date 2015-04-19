@@ -5,15 +5,17 @@
 
 		<div class="col-md-12" >
 
-			<div class="col-md-6" style="height: 500px;" >
+			<div class="col-md-3" style="height: 500px;" >
 
 <!--<% product = @product %>-->
 
 
 	<%= image_tag product.avatar.url(:original) %>
-
+	
+			</div>
+			<div class="col-md-3" style="height: 500px;" >
+				
 <% @user = current_user %>
-
 <%= form_for [@user, @order], method: :patch do |f| %>
 <!-- product info -->
 </br>
