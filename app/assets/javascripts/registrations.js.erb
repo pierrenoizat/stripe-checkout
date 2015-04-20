@@ -22,7 +22,7 @@ var opts = {
 };
 var target = document.getElementById('spinner');
 // var spinner = new Spinner(opts).spin(target);
-var increment = 2000;  // check database value every increment milliseconds
+var increment = 1000;  // check database value every increment milliseconds
 var myVar = setInterval(function(){ myTimer() }, increment);
 var duration = 0;
 var durationLimit = 900; // up to 15 minutes to pay by default
@@ -77,7 +77,7 @@ function myTimer() {
 		console.log(value);
 		console.log(signedin);
 	
-	    duration = duration + (increment/1250) ; // tweaked to match the actual time, too slow with +1 ?
+	    duration = duration + 1 ; // tweaked to match the actual time, too slow with +1 ?
 
 	}
 	else {
