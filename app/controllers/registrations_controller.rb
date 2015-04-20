@@ -74,7 +74,10 @@ class RegistrationsController < Devise::RegistrationsController
         redirect_to after_sign_up_path_for(@user), notice: "Bitcoin payment received, thank you! You signed up successfully."
       else
         @user = User.find_by_email(params[:email])
-        redirect_to after_sign_up_path_for(@user), notice: "Card payment received, thank you! You signed up successfully."
+        unless user_signed_in?
+          sign_in(@user)
+        end
+        redirect_to @user, notice: "Card payment received, thank you! You signed up successfully."
       end
       
     else
