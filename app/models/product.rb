@@ -33,10 +33,10 @@ class Product < ActiveRecord::Base
    
 
    # validates_attachment_presence :document
-   validates_attachment_content_type :document, :content_type => [ 'application/pdf','text/plain',"application/epub+zip"]
-   validates_attachment_file_name :document, :matches => [/png\Z/, /jpe?g\Z/,/epub\Z/,/pdf\Z/]
+   validates_attachment_content_type :document, :content_type => [ 'application/pdf','text/plain',"application/epub+zip","application/octet-stream","application/zip"]
+   validates_attachment_file_name :document, :matches => [/png\Z/, /jpe?g\Z/,/epub\Z/,/pdf\Z/,/webarchive\Z/,/zip\Z/]
    validates_attachment :document,
-      :size => { :in => 0..1499.kilobytes }
+      :size => { :in => 0..2499.kilobytes }
    do_not_validate_attachment_file_type :document
 
    has_attached_file :audio
@@ -44,14 +44,14 @@ class Product < ActiveRecord::Base
    validates_attachment_content_type :audio, :content_type => [ 'audio/mp3','audio/mpeg']
    validates_attachment_file_name :audio, :matches => [/mp3\Z/, /mp4\Z/]
    validates_attachment :audio,
-      :size => { :in => 0..1499.kilobytes }
+      :size => { :in => 0..2499.kilobytes }
    
    has_attached_file :video
    # validates_attachment_presence :video
    validates_attachment_content_type :video, :content_type => [ 'video/mp4','video/mpeg']
    validates_attachment_file_name :video, :matches => [/mp4\Z/]
    validates_attachment :video,
-      :size => { :in => 0..1499.kilobytes }
+      :size => { :in => 0..2499.kilobytes }
 
   has_many :line_items
   has_many :orders, :through => :line_items
@@ -60,7 +60,7 @@ class Product < ActiveRecord::Base
   
   CATEGORIES = ["ebook","paperback","membership"]
   
-  DOC_TYPES = ["pdf", "epub", "video", "audio"]
+  DOC_TYPES = ["pdf", "epub", "webarchive","zip","video", "audio"]
   
   def set_default_stock
     self.stock ||= 1

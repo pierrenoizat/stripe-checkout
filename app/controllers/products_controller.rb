@@ -19,6 +19,10 @@ class ProductsController < ApplicationController
           send_data data.read, filename: "monfichier.epub", type: "application/epub+zip", disposition: 'attachment', stream: 'true', buffer_size: '4096'
         when "pdf"
           send_data data.read, filename: "monfichier.pdf", type: "application/pdf", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+        when "webarchive"
+          send_data data.read, filename: "monfichier.webarchive", type: "application/octet-stream", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+        when "zip"
+          send_data data.read, filename: "monfichier.zip", type: "application/zip", disposition: 'attachment', stream: 'true', buffer_size: '4096'
         else
           redirect_to store_products_path
         end
@@ -30,12 +34,13 @@ class ProductsController < ApplicationController
 
   def video_download
      @product = Product.find(params[:id])
-      file_path = @product.video_file_name
-      if !file_path.nil?
-  send_file "#{Rails.root}/public/system/photos/#{@product.id}/original/#{file_path}", :x_sendfile => true 
-  else 
-         redirect_to store_products_path
-  end
+     @path = @product.video.url
+     if !@path.nil?
+      data = open(@path) 
+      send_data data.read, filename: "monfichier.mp4", type: "'video/mp4", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+    else 
+      redirect_to store_products_path
+    end
   end
 
   def audio_download

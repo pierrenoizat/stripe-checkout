@@ -25,6 +25,7 @@ Rails.application.routes.draw do
         get 'pay'
         post 'checkout'
         post 'document_download'
+        post 'video_download'
         get 'info'
         end
       collection do

@@ -21,8 +21,8 @@
     <%= f.text_field :description, :style => "width: 450px;height: 100px;", :default => @product.description %>
   </div>
 <div class="field">
-    <%= f.label 'Price:' %>
-    <%= f.text_field :price %>
+    <%= f.label 'Price in eurocents:' %>
+    <%= f.text_field :price, :placeholder => "Price in eurocents, e.g. 99 for 0,99 €", :style => "width: 250px;" %>
   </div>
 <div class="field">
     <%= f.label '1st Category:' %>
@@ -78,7 +78,7 @@
 	<% end %>
 <aside>* File image format: png, jpg</aside>
 <aside>* Image height: 300 px for correct display alignment</aside>
-<aside>* Document file format: png, jpg, epub, pdf </aside>
+<aside>* Document file format: png, jpg, epub, pdf, webarchive </aside>
 <aside>* Audio file format: mp3, mp4 </aside>
 <aside>* Video file format: mp4 </aside>
 <aside>* Attachment size: less than 1500 kilobytes</aside>
