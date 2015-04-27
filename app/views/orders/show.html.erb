@@ -33,7 +33,7 @@
 
 	<div><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></div></br>
 	<!--<%= link_to "Download to Browser", @product.avatar.url(:original, false),:class => 'btn btn-success btn-large' %>-->
-	<% if !@product.document_file_name.blank? and @order.status == 'paid' %> 
+	<% if @product.has_attachment? and @order.status == 'paid' %> 
 	<% if current_user %>
 		<% if current_user.admin? %>
 			<%= link_to 'Edit',edit_product_path(@product), :class => 'btn btn-primary btn-small' %>

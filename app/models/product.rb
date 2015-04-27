@@ -58,12 +58,16 @@ class Product < ActiveRecord::Base
   before_destroy :ensure_not_referenced_by_any_line_item
   after_initialize :set_default_stock, :if => :new_record?
   
-  CATEGORIES = ["ebook","paperback","membership"]
+  CATEGORIES = ["ebook","paperback","membership", "music"]
   
   DOC_TYPES = ["pdf", "epub", "webarchive","zip","video", "audio"]
   
   def set_default_stock
     self.stock ||= 1
+  end
+  
+  def has_attachment?
+    !self.document_file_name.blank? or ( !self.audio_file_name.blank? or !self.video_file_name.blank?)
   end
   
 
