@@ -37,13 +37,24 @@ class ProductsController < ApplicationController
      @path = @product.video.url
      if !@path.nil?
       data = open(@path) 
-      send_data data.read, filename: "monfichier.mp4", type: "'video/mp4", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+      send_data data.read, filename: "monfichier.mp4", type: "video/mp4", disposition: 'attachment', stream: 'true', buffer_size: '4096'
+    else 
+      redirect_to store_products_path
+    end
+  end
+  
+  def audio_download
+     @product = Product.find(params[:id])
+     @path = @product.audio.url
+     if !@path.nil?
+      data = open(@path) 
+      send_data data.read, filename: "monfichier.mp3", type: "audio/mp3", disposition: 'attachment', stream: 'true', buffer_size: '4096'
     else 
       redirect_to store_products_path
     end
   end
 
-  def audio_download
+  def default_download
      @product = Product.find(params[:id])
       file_path = @product.audio_file_name
       if !file_path.nil?
