@@ -30,8 +30,17 @@
 			<%= link_to "Delete", product_path(product), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'btn btn-default btn-xs btn-danger' %>
 		<% end %>
 		<% if current_user.purchased_product?(product.id) and product.digital %>
-		<%= button_to t('.download_document', :default => "Download document"),
+			<% case product.second_category %>
+			<% when "video" %>
+				<%= button_to t('.download_video', :default => "Download video"),
+	                video_download_product_path(product), :action => :document_download, :class => "btn btn-success btn-small" %>
+			<% when "audio" %>
+				<%= button_to t('.download_audio', :default => "Download"),
+			                audio_download_product_path(product), :action => :document_download, :class => "btn btn-success btn-small" %>
+			<% else %>
+			<%= button_to t('.download_document', :default => "Download document"),
 	                document_download_product_path(product), :action => :document_download, :class => "btn btn-success btn-small" %>
+			<% end %>
 		<% else %>
 		<!--<%= link_to 'Order', checkout_product_path(product), :class => 'btn btn-primary btn-small' %>-->
 		

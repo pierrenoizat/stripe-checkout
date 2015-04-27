@@ -33,6 +33,7 @@ module RailsStripeCheckout
     $MPK = 'c56b2f46fe68c07d616ab218019fb9065493590a4bb1fb030c51d532c5598b6a834e4595e4cb7f89f07d409659078b7aa5d47026cf887ee6658910eb1d38629a'
     # $PRODUCT_PRICE = 50
     $MIN_STRIPE_AMOUNT = 50  # Stripe requires that a card payment amount be at least 50 cents.
+    $MAX_FILE_SIZE = 2499 # maximum file size for attached file (video, audio or document), in kilobytes
     
     AWS.config(access_key_id: Figaro.env.access_key_id, secret_access_key: Figaro.env.secret_access_key, region: 'eu-west-1')
     
