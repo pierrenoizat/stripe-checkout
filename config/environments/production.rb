@@ -93,7 +93,9 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   
-  $MAIN_URL = "https://serene-waters-8217.herokuapp.com/"
-  $ORDERS_URL = "https://serene-waters-8217.herokuapp.com/orders/"
+  # $MAIN_URL = "https://serene-waters-8217.herokuapp.com/"
+  # $ORDERS_URL = "https://serene-waters-8217.herokuapp.com/orders/"
+  $MAIN_URL = "http://microbitcoin.net/"
+  $ORDERS_URL = "http://microbitcoin.net/orders/"
   
 end
