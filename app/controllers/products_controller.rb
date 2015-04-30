@@ -146,7 +146,7 @@ class ProductsController < ApplicationController
                                                                       callback_url: "#{$ORDERS_URL}callback"
 
           @order.address = payment_request["payment_address"]
-          @btc_amount = payment_request["btc_amount"]
+          @btc_amount = payment_request["btc_amount"].to_s
           @expiry = payment_request["expires_at"]
 
           @order.balance = @btc_amount.to_d

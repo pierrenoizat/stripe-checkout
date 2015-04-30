@@ -121,7 +121,11 @@ function myStopFunction() {
 			element.innerHTML = "Payment received, thank you: order complete";
 
 			element = document.getElementById("titre");
-			element.innerHTML = "Order # " + orderId.toString();
+			var linkString = "Order # " + orderId.toString();
+			var linkUrl = "<%= $ORDERS_URL %>" + orderId;
+			var result = linkString.link(linkUrl);
+			element.innerHTML = result;
+			
 			element = document.getElementById("bitcoin-or");
 			element.parentNode.removeChild(element);
 			element = document.getElementById("qrcodeCanvas");
