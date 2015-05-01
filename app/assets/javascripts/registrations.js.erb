@@ -31,6 +31,8 @@ var pc = "0%";
 var email = $('#timer').data('email');
 
 var orderId = $('#timer').data('orderid');
+var linkUrl = "<%= $ORDERS_URL %>" + orderId;
+
 var pwd = $('#timer').data('pwd');
 var expiry = $('#timer').data('expiry');  // time between order creation and expiry, in seconds
 var zeroTime = new Date();
@@ -124,7 +126,6 @@ function myStopFunction() {
 
 			element = document.getElementById("titre");
 			var linkString = "Order # " + orderId.toString();
-			var linkUrl = "<%= $ORDERS_URL %>" + orderId;
 			var result = linkString.link(linkUrl);
 			element.innerHTML = result;
 			
@@ -147,8 +148,10 @@ function myStopFunction() {
 			element.innerHTML = result;
 			
 			element = document.createElement("input");
-			element.setAttribute("type", "submit");
+			element.setAttribute("type", "button");
 			element.setAttribute("value", "Go to download page");
+			element.setAttribute("onclick", "window.location.href=linkUrl");
+
 			var container = document.getElementById("container");
 			container.appendChild(element);
 
