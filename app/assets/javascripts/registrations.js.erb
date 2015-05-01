@@ -148,8 +148,8 @@ function myStopFunction() {
 			
 			element = document.createElement("input");
 			element.setAttribute("type", "submit");
+			element.setAttribute("form_id", "download-link");
 			element.setAttribute("value", "Go to download page");
-			document.getElementById("download-link").appendChild(element);
 
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
