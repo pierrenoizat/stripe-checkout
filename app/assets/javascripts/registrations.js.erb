@@ -138,11 +138,10 @@ function myStopFunction() {
 			element.parentNode.removeChild(element);
 			element = document.getElementById("pay-bitcoin");
 			element.parentNode.removeChild(element);
-			element = document.getElementById("my-buttons");
-			element.parentNode.removeChild(element);
+
 			element = document.getElementById("my-buttons");
 			linkString = "Go to download page";
-			var result = linkString.link(linkUrl);
+			result = linkString.link(linkUrl);
 			element.innerHTML = result;
 
 			var elements = document.getElementsByClassName("progress");
