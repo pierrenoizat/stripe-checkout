@@ -48,8 +48,8 @@ function myTimer() {
 	    d = new Date();
 	    var t = d.toLocaleTimeString().substring(0,8);  // keep only leftmost 8 characters
 	    // document.getElementById("timer").innerHTML = t;
-
-		document.getElementById("timer").innerHTML = "Flash above qrcode with your wallet then allow aprox. 10 secs before your download link is displayed";
+		var timerText = "Flash above qrcode with your wallet then allow aprox. 10 secs before your download link is displayed"
+		document.getElementById("timer").innerHTML = timerText;
 		temps = (1000*Number(maxTime) - Number(d))/60000 ;  // time left in minutes
 		document.getElementById('temps').innerHTML = Math.round( temps ).toString();
 
@@ -149,11 +149,8 @@ function myStopFunction() {
 			
 			element = document.createElement("input");
 			element.setAttribute("type", "button");
-			element.setAttribute("value", "Go to download page");
-			linkUrl = linkUrl + "/complete"
-			linkUrl = "window.location.href=" + linkUrl;
-			element.setAttribute("onclick", linkUrl);
 
+			element.setAttribute("onClick", linkUrl);
 			var bouton = document.getElementById("bouton");
 			bouton.appendChild(element);
 
