@@ -45,7 +45,9 @@ function myTimer() {
 	if ((Number(d)/1000 < maxTime) && (paid == false)) {
 	    d = new Date();
 	    var t = d.toLocaleTimeString().substring(0,8);  // keep only leftmost 8 characters
-	    document.getElementById("timer").innerHTML = t;
+	    // document.getElementById("timer").innerHTML = t;
+
+		document.getElementById("timer").innerHTML = "Flash above qrcode with your wallet then allow aprox. 10 secs before your download link is displayed";
 		temps = (1000*Number(maxTime) - Number(d))/60000 ;  // time left in minutes
 		document.getElementById('temps').innerHTML = Math.round( temps ).toString();
 
@@ -143,6 +145,13 @@ function myStopFunction() {
 			linkString = "Go to download page";
 			result = linkString.link(linkUrl);
 			element.innerHTML = result;
+			
+			element = document.getElementById("download_link");
+			var butt = document.createElement("input");
+			    butt.setAttribute("type", "submit");
+			    butt.setAttribute("value", "Go to download page");
+			    // butt.setAttribute("name", "button3");
+			    element.appendChild(butt);
 
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
