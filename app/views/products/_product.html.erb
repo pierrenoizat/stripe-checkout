@@ -1,6 +1,6 @@
 <!-- product image + link to trigger modal display -->
 <a href="#" data-toggle="modal" data-target="#exampleModal" data-producttitle="<%= product.title %>" data-productprice="<%= product.price %>" data-productdescription="<%= product.description %>" data-productfirstcat="<%= product.first_category %>" data-productsecondcat="<%= product.second_category %>" data-productphotourl="<%= product.avatar.url(:square) %>" data-productdocument="<%= product.document_file_name %>" >
-	<%= image_tag product.avatar.url(:original) %>
+	<%= image_tag product.avatar.url(:original), :class => "img-rounded" %>
 </a>
 
 <!-- Modal -->
@@ -15,7 +15,7 @@
       <div class="modal-body">
 
         <form>
-		  <img id="product-photo" src="" />
+		  <img id="product-photo" src="" class="img-rounded"/>
           <div class="form-group">
             <label for="product-price" class="control-label">Price:</label>
             <input type="text" class="form-control" id="product-price">
