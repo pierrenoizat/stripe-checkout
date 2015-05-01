@@ -146,12 +146,10 @@ function myStopFunction() {
 			result = linkString.link(linkUrl);
 			element.innerHTML = result;
 			
-			element = document.getElementById("download-link");
-			var butt = document.createElement("input");
-			    butt.setAttribute("type", "submit");
-			    butt.setAttribute("value", "Go to download page");
-			    // butt.setAttribute("name", "button3");
-			    element.appendChild(butt);
+			element = document.createElement("input");
+			element.setAttribute("type", "submit");
+			element.setAttribute("value", "Go to download page");
+			document.getElementById("download-link").appendChild(element);
 
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
