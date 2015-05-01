@@ -150,10 +150,10 @@ function myStopFunction() {
 			element = document.createElement("input");
 			element.setAttribute("type", "button");
 			element.setAttribute("value", "Go to download page");
-			linkUrl = "window.location.href=" + linkUrl
+			linkUrl = "window.location.href=" + linkUrl;
 			element.setAttribute("onclick", linkUrl);
 
-			var container = document.getElementById("container");
+			var bouton = document.getElementById("bouton");
 			container.appendChild(element);
 
 			var elements = document.getElementsByClassName("progress");
