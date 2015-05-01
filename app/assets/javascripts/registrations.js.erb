@@ -146,13 +146,6 @@ function myStopFunction() {
 			linkString = "Go to download page";
 			result = linkString.link(linkUrl);
 			element.innerHTML = result;
-			
-			element = document.createElement("input");
-			element.setAttribute("type", "button");
-
-			element.setAttribute("onClick", linkUrl);
-			var bouton = document.getElementById("bouton");
-			bouton.appendChild(element);
 
 			var elements = document.getElementsByClassName("progress");
 			elements[0].parentNode.removeChild(elements[0]);
