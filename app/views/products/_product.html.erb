@@ -24,14 +24,7 @@
             <label for="product-description" class="control-label">Description:</label>
             <textarea class="form-control" id="product-description"></textarea>
           </div>
-		  <div class="form-group">
-            <label for="category" class="control-label">Category:</label>
-            <input type="text" class="form-control" id="category">
-          </div>
-		<div class="form-group">
-            <label for="productdocument" class="control-label">Document:</label>
-            <input type="text" class="form-control" id="productdocument">
-          </div>
+		
         </form>
       </div>
     </div>
@@ -50,22 +43,22 @@
 		<% if current_user.purchased_product?(product.id) and product.digital %>
 			<% case product.second_category %>
 			<% when "video" %>
-				<%= button_to t('.download_video', :default => "Download video"),
+				<%= button_to I18n.t('.products.store.product.download_video', :default => "Download video"),
 	                video_download_product_path(product), :action => :document_download, :class => "btn btn-success btn-small" %>
 			<% when "audio" %>
-				<%= button_to t('.download_audio', :default => "Download"),
+				<%= button_to I18n.t('.products.store.product.download_audio', :default => "Download"),
 			                audio_download_product_path(product), :action => :document_download, :class => "btn btn-success btn-small" %>
 			<% else %>
-			<%= button_to t('.download_document', :default => "Download document"),
+			<%= button_to I18n.t('.products.store.product.download_document', :default => "Download document"),
 	                document_download_product_path(product), :action => :document_download, :class => "btn btn-success btn-small" %>
 			<% end %>
 		<% else %>
 		<%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
-		<%= link_to 'Order', checkout_product_path(product), :method => 'post', :class => 'btn btn-primary btn-small' %>
+		<%= link_to I18n.t('.products.store.product.order'), checkout_product_path(product), :method => 'post', :class => 'btn btn-primary btn-small' %>
 		<% end %>
 	<% else %>
 		<%= number_to_currency(product.price.to_f/100, unit: "€", separator: ".", delimiter: " ", format: "%n %u") %></br>
-		<% button_label = product.first_category == "membership" ? 'Sign up' : 'Order' %>
+		<% button_label = product.first_category == "membership" ? I18n.t('.products.store.product.sign_up') : I18n.t('.products.store.product.order') %>
 		<%= link_to button_label , purchase_product_path(product), :class => 'btn btn-primary btn-small' %>
 	<% end %>
 </article>

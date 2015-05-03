@@ -30,8 +30,11 @@
 </div>
 </div>
 </div>
-
-	<div><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></div></br>
+<div class="container-fluid">
+	<div class="row" >
+		<div class="col-md-12" >
+			<div class="col-md-3" >
+	<span><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></span></br>
 	<!--<%= link_to "Download to Browser", @product.avatar.url(:original, false),:class => 'btn btn-success btn-large' %>-->
 	<% if @product.has_attachment? and @order.status == 'paid' %> 
 	<% if current_user %>
@@ -61,6 +64,11 @@
 		<%= link_to button_label , purchase_product_path(@product), :class => 'btn btn-primary btn-small' %>
 	<% end %>
 	<% end %>
+			</div>
+		</div></br></br>
+	</div>
+</div>
+	
 	<% if @order.status == 'pending' %>
 	<% price = ((@order.amount*100).to_i > $MIN_STRIPE_AMOUNT ? (@order.amount*100).to_i : $MIN_STRIPE_AMOUNT) %>
 	<div id="my-buttons">

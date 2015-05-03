@@ -59,9 +59,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     arel (6.0.0)
-    autoprefixer-rails (5.1.7)
-      execjs
-      json
     aws-sdk (1.5.8)
       httparty (~> 0.7)
       json (~> 1.4)
@@ -82,9 +79,8 @@ GEM
       debug_inspector (>= 0.0.1)
     bitcoin-addrgen (0.0.2)
       ffi (~> 1.2.0)
-    bootstrap-sass (3.3.3)
-      autoprefixer-rails (>= 5.0.0.1)
-      sass (>= 3.2.19)
+    bootstrap-sass (3.2.0.0)
+      sass (~> 3.2)
     builder (3.2.2)
     byebug (3.5.1)
       columnize (~> 0.8)
@@ -323,7 +319,7 @@ DEPENDENCIES
   better_errors
   bitcoin-addrgen (~> 0.0.2)
   bitcoin-ruby!
-  bootstrap-sass
+  bootstrap-sass (= 3.2.0.0)
   byebug
   chunky_png
   cocaine (= 0.5.7)

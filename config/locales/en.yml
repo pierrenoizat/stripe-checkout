@@ -21,3 +21,22 @@
 
 en:
   hello: "Hello world"
+  products:
+      store:
+          select: "Select your favorite, then pay by Bitcoin or Card"
+          product:
+              download_audio: "Downlaod"
+              download_video: "Downlaod video"
+              download_document: "Downlaod document"
+              order: "Order"
+              sign_up: "Sign up"
+  layouts:
+      footer:
+          about: "About"
+          submit_issues: "Submit issues via "
+      navigation:
+          home: "Home"
+          sign_in: "Sign in"
+      navigation_links:
+          about: "About"
+          store: "Store"

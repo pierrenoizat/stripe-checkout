@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   # get 'products/:id', to: 'products#show', :as => :products
-
+  get 'static_pages/help'
+  get 'static_pages/about'
+  get 'static_pages/contact'
+  
   devise_for :users, :controllers => { :registrations => 'registrations' }
   devise_scope :user do
     post 'pay', to: 'registrations#pay'

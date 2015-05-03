@@ -10,14 +10,22 @@
 	
 	<% if current_user.product_id %>
 	<% @product= Product.find_by_id(current_user.product_id) %>
-		<div><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></div></br>
+	<div class="container-fluid">
+		<div class="row" >
+			<div class="col-md-12" >
+				<div class="col-md-3" >
+		<span><%= image_tag @product.avatar.url(:original, false), style: "float:left;" %></span></br>
 		<!--<%= link_to "Download to Browser", @product.avatar.url(:original, false),:class => 'btn btn-success btn-large' %>-->
 		<% if !@product.document_file_name.blank? and current_user.purchased_product?(@product.id) %>
-		<p><%= button_to t('.download_pdf', :default => "Download PDF"),
+			<p><%= button_to t('.download_pdf', :default => "Download"),
 	                document_download_product_path(@product), :action => :document_download, :class => "btn btn-success btn-small" %></p><% end %>
-	<% else %>
-    	<%= link_to 'Download', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
-	<% end %>
+		<% else %>
+    		<%= link_to 'Download', products_path('product.pdf'), :class => 'btn btn-success btn-large' %>
+		<% end %>
+				</div>
+			</div></br></br>
+		</div>
+	</div>
   <% end %>
 <% else %>
 	<% if @products.count == 1 %>

@@ -21,3 +21,22 @@
 
 fr:
   hello: "Bonjour!"
+  products:
+      store:
+          select: "Choisissez puis payez avec Bitcoin ou avec une carte bancaire"
+          product:
+              download_audio: "Télécharger"
+              download_video: "Télécharger la vidéo"
+              download_document: "Télécharger le document"
+              order: "Commander"
+              sign_up: "Souscrire"
+  layouts:
+      footer:
+          about: "A propos"
+          submit_issues: "Signaler un bug sur "
+      navigation:
+          home: "Accueil"
+          sign_in: "Connexion"
+      navigation_links:
+          about: "A propos"
+          store: "Catalogue"
