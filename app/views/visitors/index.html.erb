@@ -3,7 +3,7 @@
     <h3>Admin</h3>
     <p><%= link_to 'User count:', users_path %> <%= User.count %></p>
   <% else %>
-	<h3>Welcome</h3>
+	<h3><%= t('.welcome') %></h3>
     <h4>You purchased : <%= Product.find_by_id(current_user.product_id).title if current_user.product_id %></h4>
 	<p>Email: <%= current_user.email if current_user.email %></p>
 	<p></p></br>
@@ -30,7 +30,7 @@
 <% else %>
 	<% if @products.count == 1 %>
 	
-	<h3>Checkout</h3>
+	<h3><%= t('.checkout') %></h3>
 
 	<div class="container-fluid">
 		<div class="row" >
@@ -52,7 +52,7 @@
 	</div>
 	
 	<% else %>
-  		<h3>Join us: select your membership</h3>
+  		<h3><%= t('.join_us') %></h3>
 
 		<div class="container-fluid">
 			<div class="row" >

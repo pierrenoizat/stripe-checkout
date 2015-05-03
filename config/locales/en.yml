@@ -21,7 +21,16 @@
 
 en:
   hello: "Hello world"
+  visitors:
+      purchase:
+          purchase: "Purchase"
+      index:
+          checkout: "Checkout"
+          welcome: "Welcome!"
+          join_us: "Join us: select your membership"
   products:
+      purchase:
+          purchase: "Purchase"
       store:
           select: "Select your favorite, then pay by Bitcoin or Card"
           product:

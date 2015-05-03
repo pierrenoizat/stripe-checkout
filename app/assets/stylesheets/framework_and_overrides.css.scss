@@ -13,25 +13,8 @@ img {
   @extend .img-responsive;
   margin: 0 auto;
   }
-// override for the 'Home' navigation link
 
-.navbar {
-  font-size: inherit;
-//  background-color: rgb(46,84,112); // dark blue
-  background-color: rgb(89,186,242); /* bright turquoise  #eee; */
-  border: white;
-  }
 
-.navbar-nav > ul > li > a:hover
- 	{
-	color: yellow;
-	}
-
-.navbar-brand {
-  font-size: inherit;
-//  background-color: rgb(46,84,112);
-  background-color: rgb(89,186,242); /* bright turquoise  #eee; */
-  }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
 // create your own classes

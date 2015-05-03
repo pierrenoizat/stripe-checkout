@@ -21,7 +21,16 @@
 
 fr:
   hello: "Bonjour!"
+  visitors:
+      purchase:
+          purchase: "Acheter"
+      index:
+          checkout: "Payer la commande"
+          join_us: "Rejoignez nous: choisissez votre abonnement"
+          welcome: "Bienvenue!"
   products:
+      purchase:
+          purchase: "Acheter"
       store:
           select: "Choisissez puis payez avec Bitcoin ou avec une carte bancaire"
           product:

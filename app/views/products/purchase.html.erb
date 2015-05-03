@@ -1,10 +1,10 @@
-<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#purchaseModal">Purchase</a>
+<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#purchaseModal"><%= t('.purchase') %></a>
 <div class="modal fade" id="purchaseModal" tabindex="-1" role="dialog" aria-labelledby="purchaseModal" aria-hidden="true">
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="authform">
 	    <%= form_for(Order.new, :url => {:controller=>'orders', :action => 'pay'}, :html => { :role => 'form'}) do |f| %>
-	      <h3>Purchase</h3>
+	      <h3><%= t('.purchase') %></h3>
 			<% unless product.digital %>
 			<div class="form-group">
 		        <%= f.text_field :name, class: 'form-control', :placeholder => "#{current_user.name}" %>

@@ -4,7 +4,7 @@
 /* universal */
 
 body {
-  padding-top: 60px;
+//  padding-top: 60px;
 }
 
 section {
@@ -117,3 +117,26 @@ footer {
     }
   }
 }
+
+/* navbar */
+.navbar-custom {
+    background-color:rgb(89,186,242);
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: rgb(89,186,242);
+    background-color:rgb(89,186,242);
+}
+.navbar-custom .navbar-brand {
+    color:white;
+}
+
+.navbar-custom .navbar-nav > li > a:hover, .nav > li > a:focus { text-decoration: none; color: rgb(46,84,112); background-color: rgb(89,186,242); }
+
+.navbar-custom .navbar-nav > li > a.dropdown-toggle:hover, .nav > li > a.dropdown-toggle:focus { text-decoration: none; color: rgb(46,84,112); background-color: rgb(89,186,242); }
+
