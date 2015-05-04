@@ -42,7 +42,7 @@ fr:
   layouts:
       footer:
           about: "A propos"
-          submit_issues: "Signaler un bug sur "
+          submit_issues: "Questions concernant le code sur "
       navigation:
           home: "Accueil"
           sign_in: "Connexion"
